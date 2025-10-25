@@ -1,0 +1,33 @@
+# Sensitive configuration files
+configs/production/*.xml
+configs/backups/*.xml
+*-password*
+*-secret*
+*.key
+*.pem
+*.pfx
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
