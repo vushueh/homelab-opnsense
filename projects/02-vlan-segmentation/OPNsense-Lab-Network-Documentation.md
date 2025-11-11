@@ -83,7 +83,7 @@ This documentation details the complete implementation of an OPNsense-based netw
     ┌────┴────────────────────────┐
     │   WAN: 192.168.10.32/24     │
     │   LAN: 192.168.30.1/24      │ (Trunk carrying VLANs)
-    │   OPT1: 192.168.10.199/24   │ (Management)
+    │   OPT1: 192.168.20.254/24   │ (Management)
     │   OPT2: 192.168.40.1/24     │ (VLAN 40)
     │   OPT3: 192.168.250.1/24    │ (VLAN 250 - Attack Lab)
     │   OPT4: 192.168.70.1/24     │ (VLAN 70)
