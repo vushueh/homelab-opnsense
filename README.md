@@ -1,199 +1,98 @@
-# OPNsense Homelab Firewall
+# OPNsense Firewall Labs
 
-> Production-ready OPNsense deployment on Hyper-V with comprehensive documentation
+> A structured OPNsense firewall lab family for Hyper-V, VLAN segmentation, IDS/IPS, VPN, monitoring, and cross-family homelab integration.
 
-[![Status](https://img.shields.io/badge/Status-Production-success)]()
+[![Status](https://img.shields.io/badge/Status-Active-blue)]()
 [![Platform](https://img.shields.io/badge/Platform-Hyper--V-blue)]()
 [![OPNsense](https://img.shields.io/badge/OPNsense-25.7-orange)]()
 
-## 🎯 Quick Links
+## Purpose
 
-- [Deployment Journey](projects/01-baseline-deployment/README.md) - Complete 3-week journey from bridge mode failures to router mode success
-- [Network Topology](diagrams/) - Visual architecture diagrams
-- [Configuration Guide](docs/01-initial-setup/) - Step-by-step setup instructions
-- [Troubleshooting](troubleshooting/) - Common issues and solutions
+This repo is the OPNsense firewall family for Leonel's homelab portfolio. It documents the working OPNsense deployment, then turns it into a project series that can be repeated, tested, broken, fixed, and connected to the other lab families.
 
-## 📊 Project Status
+OPNsense is used as the inspection and lab firewall. It does not replace the production Route10 gateway. The design keeps production networks separate while giving the lab a real routed firewall, VLAN boundaries, DHCP, NAT, IDS/IPS, VPN, logging, and monitoring.
 
-| Project | Status | Phase | Documentation |
-|---------|--------|-------|---------------|
-| Baseline Deployment | ✅ Complete | Phase 1-10 | [View](projects/01-baseline-deployment/) |
-| VLAN Segmentation | ✅ Complete | Phase 8-10 | [View](projects/02-vlan-segmentation/) |
-| IDS/IPS (Suricata) | 📋 Planned | Phase 11 | [View](projects/03-ids-ips-suricata/) |
-| VPN Remote Access | 📋 Planned | Phase 13 | [View](projects/04-vpn-remote-access/) |
-| Monitoring Integration | 📋 Planned | Phase 12 | [View](projects/05-monitoring-integration/) |
-| High Availability | 💡 Future | Phase 14 | [View](projects/06-high-availability/) |
+## Quick Links
 
-**Legend**: ✅ Complete | 🔄 In Progress | 📋 Planned | 💡 Future
+- [Workflow](WORKFLOW.md)
+- [Agent Rules](AGENTS.md)
+- [Open Review Items](CLAUDE-REVIEW.md)
+- [Codex Log](CODEX-LOG.md)
+- [Project Index](projects/README.md)
+- [Family Skill](skills/opnsense-family.md)
+- [Cross-Family Integration](docs/cross-family-integration.md)
+- [Troubleshooting](troubleshooting/)
 
-## 🏗️ Current Architecture
-```
+## Current Architecture
+
+```text
 Internet
-    ↓
-Route10 Router (Alta Labs)
-    ├── Port 1 → Production Network (VLANs 10, 20) ← Always Available
-    └── Port 3 → OPNsense WAN (VLAN 10)
-         ↓
-    OPNsense VM (Router Mode - Hyper-V)
-         ├── WAN: 192.168.10.x (DHCP from Route10)
-         ├── LAN: 192.168.30.1/24 (VLAN 30)
-         ├── OPT1: 192.168.40.1/24 (VLAN 40)
-         ├── OPT2: 192.168.50.1/24 (VLAN 50)
-         ├── OPT3: 192.168.250.1/24 (VLAN 250 - Attack Lab)
-         └── MGMT: 192.168.20.254 (Management)
-         ↓
-    Cisco Catalyst 2960G (VLAN Distribution)
-         ↓
-    Inspection Network Devices
+    |
+Alta Labs Route10
+    |-- Production networks: VLAN 10 / VLAN 20
+    |
+    |-- OPNsense WAN: 192.168.10.x
+            |
+        OPNsense VM on Hyper-V
+            |-- MGMT: 192.168.20.254
+            |-- VLAN 30: 192.168.30.1/24   Blue team / services
+            |-- VLAN 40: 192.168.40.1/24   Kali / attacker tools
+            |-- VLAN 50: 192.168.50.1/24   Reserved lab segment
+            |-- VLAN 250: 192.168.250.1/24 Vulnerable lab
+            |
+        Cisco Catalyst 2960G / Hyper-V vSwitch / lab VMs
 ```
 
-## 🔧 Environment Specifications
+## Family Project Map
 
-**Hypervisor**
-- Platform: Microsoft Hyper-V
-- Host OS: Windows Server 2022
-- RAM Allocated: 4GB (OPNsense VM)
-- Storage: 500GB SSD
+| # | Project | Status | Purpose |
+|---|---------|--------|---------|
+| 01 | [Baseline Router Deployment](projects/01-baseline-deployment/) | Complete | Preserve the bridge-mode failure analysis and final router-mode success |
+| 02 | [VLAN Segmentation](projects/02-vlan-segmentation/) | Complete | Document VLANs, DHCP, routing, firewall rules, and lab segmentation |
+| 03 | [IDS/IPS with Suricata](projects/03-ids-ips-suricata/) | Planned | Turn OPNsense into a detection and prevention sensor for lab traffic |
+| 04 | [VPN Remote Access](projects/04-vpn-remote-access/) | Planned | Build controlled remote access into lab networks |
+| 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Planned | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
+| 06 | [High Availability Design](projects/06-high-availability/) | Future | Design CARP/pfsync HA requirements and failover testing |
+| 07 | Future: DNS and DHCP Services | Future | Harden DNS/DHCP design and document resolver behavior |
+| 08 | Future: Policy Automation | Future | Explore API/export workflows, backups, and repeatable change control |
+| 09 | Future: Cross-Family Firewall Capstone | Future | Connect CML, Physical CCNA, Windows AD, SOC, and OPNsense policies |
 
-**Network Hardware**
-- Router: Alta Labs Route10
-- Core Switch: Cisco Catalyst 2960G
-- NICs: Intel I350 Dual-Port Gigabit + Intel I217-LM
+## Standard Project Structure
 
-**OPNsense Configuration**
-- Version: 25.7
-- Mode: Router Mode (not bridge)
-- Interfaces: 3 physical + 4 VLANs
-- Uptime: 24/7 capable
+Each project should follow the same shape used by the other homelab families:
 
-## 🎓 Key Learnings
-
-> **Bridge Mode Failed**: Virtual switches (Hyper-V, Proxmox) cannot provide true transparent layer 2 bridging. Hardware limitations (no PCI passthrough/ACS support) made this impossible.
-
-> **Router Mode Succeeded**: Embracing layer 3 routing architecture provided clean segmentation, full functionality, and excellent stability.
-
-> **Production Isolation Critical**: Keeping production network (VLANs 10, 20) completely separate from inspection network (VLANs 30, 40, 50, 250) ensures zero production impact during testing.
-
-## 📚 Documentation Structure
-```
-docs/
-├── 01-initial-setup/         # Hardware, Hyper-V, network planning
-├── 02-network-configuration/ # Interfaces, VLANs, firewall rules, NAT
-├── 03-security/              # IDS/IPS, hardening, threat detection
-├── 04-services/              # DHCP, DNS, VPN
-├── 05-monitoring/            # Netflow, syslog, SIEM integration
-└── 06-advanced/              # HA, reverse proxy, load balancing
+```text
+projects/project-name/
+|-- README.md              # Objectives, topology, status, phase index
+|-- phases/                # Step-by-step phase guides
+|-- configs/               # Sanitized config exports, snippets, templates
+|-- verification/          # Test outputs, screenshots, evidence
+`-- troubleshooting/       # Break/fix notes and recovery steps
 ```
 
-## 🚀 Quick Start
+## Cross-Family Role
 
-### Prerequisites
-- Hyper-V enabled Windows Server 2022 (or Windows 10/11 Pro)
-- Minimum 3 network adapters (physical or virtual)
-- 4GB RAM for OPNsense VM
-- 20GB storage for OPNsense VM
+OPNsense is not isolated. It is the firewall and routing lab that connects several families:
 
-### Installation Steps
+| Family | OPNsense Link |
+|--------|---------------|
+| Homelab_CCNA | VLAN routing, firewall policy, syslog, NetFlow, Wireshark validation |
+| CML Enterprise Labs | External connectivity, NAT/ACL comparisons, future hybrid routing |
+| Windows Server Business Admin | Future RADIUS/NPS authentication and log forwarding |
+| Proxmox / Hyper-V Management | VM network placement, VLAN reachability, firewall access controls |
+| SOC / Blue Team | Suricata, firewall logs, DNS logs, Wazuh/SIEM telemetry |
+| SNML VirtualBox | Parallel firewall/security concepts without merging platforms |
 
-1. **Read the deployment journey**
-   - [Complete 3-week documentation](projects/01-baseline-deployment/README.md)
-   - Learn from failures (bridge mode) and success (router mode)
+## Key Design Principles
 
-2. **Plan your network**
-   - [Hardware requirements](docs/01-initial-setup/hardware-requirements.md)
-   - [IP address planning](docs/01-initial-setup/network-planning.md)
+- Production VLANs stay safe. Do not make OPNsense the dependency for the home production path until a dedicated migration project exists.
+- Router mode is the working architecture. Bridge mode is documented as a lesson learned, not a current goal.
+- Every project needs a GUI path, a verification path, a rollback note, and a break/fix exercise.
+- Sensitive exports must be sanitized before committing. Do not publish private keys, VPN secrets, RADIUS secrets, API keys, or full unredacted config XML.
+- OPNsense changes should be documented before and after, with screenshots or command evidence.
 
-3. **Deploy OPNsense**
-   - [Hyper-V VM configuration](docs/01-initial-setup/hyper-v-configuration.md)
-   - [Router mode setup](docs/01-initial-setup/router-mode-setup.md)
+## Status
 
-4. **Configure networking**
-   - [Interface assignment](docs/02-network-configuration/interfaces.md)
-   - [VLAN configuration](docs/02-network-configuration/vlans.md)
-   - [Firewall rules](docs/02-network-configuration/firewall-rules.md)
+The repo has been converted into a family-project layout. Projects 01 and 02 preserve the existing completed work. Projects 03 through 06 now have starter folders and phase guides so they can be completed one at a time.
 
-## 🛠️ Available Scripts
-```bash
-# Backup automation
-./scripts/backup/backup-config.sh           # Manual config backup
-./scripts/backup/automated-backup.ps1       # Scheduled backups (Windows)
-
-# Deployment helpers
-./scripts/deployment/initial-setup.sh       # Post-installation setup
-./scripts/deployment/vlan-creator.sh        # Bulk VLAN creation
-
-# Monitoring
-./scripts/monitoring/health-check.sh        # System health check
-./scripts/monitoring/traffic-stats.sh       # Real-time traffic stats
-
-# Maintenance
-./scripts/maintenance/update-opnsense.sh    # Safe update procedure
-./scripts/maintenance/config-diff.sh        # Compare configurations
-```
-
-## 📁 Repository Structure
-```
-homelab-opnsense/
-├── docs/              # Reference documentation
-├── projects/          # Implementation projects with status
-├── configs/           # Configuration files and backups
-├── scripts/           # Automation and maintenance scripts
-├── diagrams/          # Network topology diagrams
-├── troubleshooting/   # Common issues and solutions
-└── references/        # Cheat sheets and links
-```
-
-## 🐛 Troubleshooting
-
-Common issues and solutions:
-
-- [Bridge mode failures](troubleshooting/bridge-mode-failures.md) - Why it doesn't work in virtualization
-- [Hyper-V specific issues](troubleshooting/hyper-v-specific.md) - vSwitch, MAC spoofing, VLAN trunk
-- [Network connectivity](troubleshooting/network-connectivity.md) - Routing, DHCP, DNS problems
-- [Performance tuning](troubleshooting/performance-tuning.md) - Optimize throughput
-
-## 🤝 Contributing
-
-This is a personal homelab project, but suggestions and improvements are welcome!
-
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request with clear documentation
-
-## 📄 License
-
-MIT License - Free to use and modify with attribution
-
-## 📞 Support
-
-**For OPNsense Issues**:
-- Official Documentation: https://docs.opnsense.org/
-- Community Forum: https://forum.opnsense.org/
-
-**For Hyper-V Issues**:
-- Microsoft Docs: https://docs.microsoft.com/en-us/virtualization/
-
-**General Networking**:
-- r/homelab: https://reddit.com/r/homelab
-- r/OPNsenseFirewall: https://reddit.com/r/OPNsenseFirewall
-
-## 🎯 Roadmap
-
-- [x] Phase 1-10: Baseline deployment (Router Mode) ✅
-- [ ] Phase 11: IDS/IPS with Suricata
-- [ ] Phase 12: Monitoring integration (Netflow, Wazuh)
-- [ ] Phase 13: VPN remote access
-- [ ] Phase 14: High availability configuration
-
-## 🙏 Acknowledgments
-
-- **OPNsense Team** - Excellent open-source firewall
-- **r/homelab community** - Inspiration and troubleshooting help
-- **Lawrence Systems** - OPNsense tutorials on YouTube
-
----
-
-**Author**: Leonel Chongong  
-**Created**: October 2025  
-**Status**: Production Ready  
-**Last Updated**: 2025-10-24
+**Trigger phrase:** `opnsense project`
