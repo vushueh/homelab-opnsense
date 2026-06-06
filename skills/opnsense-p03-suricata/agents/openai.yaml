@@ -1,0 +1,4 @@
+interface:
+  display_name: "OPNsense P03 Suricata"
+  short_description: "Run OPNsense Project 03 IDS/IPS with Suricata safely."
+  default_prompt: "Start OPNsense Project 03 Suricata. Read the repo review/log files, then guide the current phase with GUI steps, verification, rollback, and evidence."

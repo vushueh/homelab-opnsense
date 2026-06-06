@@ -22,11 +22,13 @@ description: >
 | VLAN 40 (Kali) | 192.168.40.1/24 |
 | VLAN 50 | 192.168.50.1/24 |
 | VLAN 250 (Vulnerable) | 192.168.250.1/24 |
-| Route10 (production) | 192.168.70.1 — NEVER modify |
+| Route10 (production) | Production gateway path stays separate — never modify without explicit approval |
 
 **Lab VLANs:** 30, 40, 50, 250 | **Never touch:** VLAN 10, 20
 **SSH to OPNsense:** via Tailscale or management VLAN 20
 **GUI:** https://192.168.20.254
+
+**Project scope note:** P03-P06 are represented in this repo. P07-P09 are future/proposed extensions unless matching project folders are added later.
 
 ---
 
@@ -45,7 +47,7 @@ GUI: System → Firmware → Plugins → confirm os-suricata installed
 GUI: Interfaces → Assignments → document all interfaces
 GUI: Firewall → Rules → capture screenshots of VLAN 30/40/250 rules
 GUI: Services → Intrusion Detection → confirm service state
-CLI (after approval): configctl interface list | sockstat -4 -l
+CLI (after approval): configctl interface list ; sockstat -4 -l
 ```
 **Save config backup first:** System → Configuration → Backups → Download
 
@@ -66,12 +68,12 @@ VERIFY: ps aux | grep suricata → process running
 ### Phase 3 — Verify Alerts
 
 ```bash
-! From Kali VM (VLAN 40) — safe test traffic
+# From Kali VM (VLAN 40) — safe test traffic
 nmap -sV 192.168.250.0/24
 curl -A "sqlmap/1.0" http://192.168.250.1
 curl "http://192.168.250.1/test.php?id=1+OR+1=1"
 
-! CLI verify (after approval)
+# CLI verify (after approval)
 grep '"event_type":"alert"' /var/log/suricata/eve.json | tail -5 | \
   python3 -c "import sys,json; [print(json.loads(l).get('src_ip'),'->', json.loads(l).get('dest_ip'), json.loads(l).get('alert',{}).get('signature','')) for l in sys.stdin]"
 ```
@@ -112,7 +114,7 @@ If any NO → document "Deferred — reason" and close project
 
 ## Project 04 — VPN Remote Access (WireGuard)
 
-**Requires:** P03 complete (monitoring before opening WAN)
+**Requires:** P03 complete; P05 monitoring should be complete before opening WAN.
 **Slash command:** `/opnsense-p04`
 
 ### Purpose
@@ -147,9 +149,9 @@ GUI: VPN → WireGuard → General → Enable → Apply
 ```
 
 ```bash
-! Client key generation (on laptop — NOT on server)
+# Client key generation (on laptop — NOT on server)
 wg genkey | tee client-private.key | wg pubkey > client-public.key
-! NEVER commit client-private.key to git
+# NEVER commit client-private.key to git
 ```
 
 Client config template (sanitized — no real keys):
@@ -190,27 +192,30 @@ CLI: sockstat -4 -l | grep 51820 → confirm listening
 ### Phase 4 — Test and Break/Fix
 
 ```bash
-! Full remote test — connect from phone hotspot
-wg show    ! handshake present? transfer bytes?
+# Full remote test — connect from phone hotspot
+wg show    # handshake present? transfer bytes?
 
-! Reachable (should succeed)
-ping 192.168.30.1 | ping 192.168.40.1 | ping 192.168.250.1
+# Reachable (should succeed)
+ping 192.168.30.1
+ping 192.168.40.1
+ping 192.168.250.1
 
-! Blocked (should fail — timeout)
-ping 192.168.10.35 | ping 192.168.20.254
+# Blocked (should fail — timeout)
+ping 192.168.10.35
+ping 192.168.20.254
 ```
 
 | Scenario | Break | Fix |
 |----------|-------|-----|
 | Wrong endpoint | Change client config Endpoint IP | Correct IP |
-| Rule order wrong | Move VLAN 250 block below allow | Move block rule above allow |
+| Rule order wrong | Add temporary VLAN 250 block below allow | Move block rule above allow to prove order, then remove it |
 | WAN port closed | Remove UDP 51820 WAN rule | Re-add WAN rule |
 
 ---
 
 ## Project 05 — Monitoring and SIEM Integration
 
-**Requires:** P03 (Suricata alerts) and P04 (VPN) complete
+**Requires:** P03 complete. Recommended before P04 WAN exposure.
 **Slash command:** `/opnsense-p05`
 
 ### Purpose
@@ -235,20 +240,20 @@ GUI: System → Settings → Logging → Remote → +
 
 GUI: Firewall → Settings → Advanced → enable Log firewall default rules
 
-CLI (verify): grep -R "<SIEM-IP>" /usr/local/etc/syslog-ng.conf /usr/local/etc/syslog-ng.conf.d/ 2>/dev/null
-              tail -n 20 /var/log/filter/latest.log    ! firewall log (NOT clog — modern OPNsense)
-              tail -n 20 /var/log/system/latest.log    ! system log
+CLI (verify): grep -R "<SIEM-IP>" /usr/local/etc/syslog-ng.conf /usr/local/etc/syslog-ng.conf.d /var/etc 2>/dev/null
+              tail -n 20 /var/log/filter/latest.log    # firewall log (NOT clog — modern OPNsense)
+              tail -n 20 /var/log/system/latest.log    # system log
 ```
 
 ### Phase 3 — Suricata Alert Forwarding and NetFlow
 
 ```
-! Suricata EVE forwarding — OPNsense native option:
+# Suricata EVE forwarding — OPNsense native option:
 GUI: Services → Intrusion Detection → Administration → Logging
   → Enable EVE syslog output if available in your OPNsense version
-  → Or use: Services → Intrusion Detection → Log Forwarding (version-dependent)
+  → If the GUI differs, stop and record the exact OPNsense version before using a custom forwarder
 
-! NetFlow — built-in (no plugin needed in modern OPNsense)
+# NetFlow — built-in (no plugin needed in modern OPNsense)
 GUI: Reporting → NetFlow → Settings
   Interface: VLAN 30, 40, 250 | Collector: <SIEM-IP> | Port: 2055 | Version: v9
   Enable → Apply
@@ -264,11 +269,11 @@ Saved SIEM queries to create:
 
 Break/Fix — logs stop arriving:
 ```
-! Break: change syslog target port to wrong value
+# Break: change syslog target port to wrong value
 GUI: System → Settings → Logging → Remote → edit → wrong port
-! Symptom: SIEM shows gap in OPNsense events
-! Diagnose: grep wrong port in syslog config; test with nc -u <SIEM-IP> 514
-! Fix: correct port, apply
+# Symptom: SIEM shows gap in OPNsense events
+# Diagnose: grep wrong port in syslog config; test with nc -u <SIEM-IP> 514
+# Fix: correct port, apply
 ```
 
 ---
@@ -303,7 +308,7 @@ GUI: Services → Unbound DNS → General → enable Rebind detection → Apply
 
 VERIFY: dig @127.0.0.1 sigfail.verteiltesysteme.net → SERVFAIL (DNSSEC working)
         dig @127.0.0.1 google.com → NOERROR
-        ss -tnp | grep :853 → DoT connections active
+        sockstat -4 -6 -c | grep ':853' → DoT connections active
 ```
 
 ### Phase 3 — DHCP Static Mappings
@@ -343,10 +348,10 @@ OPNsense REST API for config backups, rule exports, and scripted changes. Git-ba
 GUI: System → Access → Users → admin → API keys → + → download key/secret
 NEVER store key/secret in git
 
-! Test:
+# Test:
 export OPN_KEY="<key>" OPN_SECRET="<secret>" OPN_HOST="192.168.20.254"
 curl -k -u "$OPN_KEY:$OPN_SECRET" "https://$OPN_HOST/api/core/firmware/info"
-! Expected: JSON with OPNsense version
+# Expected: JSON with OPNsense version
 ```
 
 ### Phase 2 — Config Backup Script
@@ -360,10 +365,10 @@ OPN_HOST = os.environ["OPN_HOST"]
 OPN_KEY  = os.environ["OPN_KEY"]
 OPN_SECRET = os.environ["OPN_SECRET"]
 
-resp = requests.post(f"https://{OPN_HOST}/api/core/backup/download",
+resp = requests.get(f"https://{OPN_HOST}/api/core/backup/download/this",
     auth=(OPN_KEY, OPN_SECRET), verify=False, timeout=30)
 Path(f"backups/opnsense-{datetime.now().strftime('%Y%m%d-%H%M')}.xml").write_bytes(resp.content)
-! WARNING: XML contains firewall rules and VPN keys — PRIVATE repo only
+# WARNING: XML contains firewall rules and VPN keys. Store outside the public repo or in an ignored/encrypted backup path.
 ```
 
 ### Phase 3 — Rule Export and Diff
@@ -371,7 +376,8 @@ Path(f"backups/opnsense-{datetime.now().strftime('%Y%m%d-%H%M')}.xml").write_byt
 ```python
 resp = requests.get(f"https://{OPN_HOST}/api/firewall/filter/searchRule",
     auth=(OPN_KEY, OPN_SECRET), verify=False)
-! Save as JSON → git diff before/after GUI change → confirms only intended change
+# Save as JSON -> git diff before/after GUI change -> confirms only intended change.
+# Note: this API covers rules managed by the newer Firewall Rules/Automation API; verify it returns the rules Leonel expects before relying on it for full policy diffing.
 ```
 
 ### Phase 4 — Scripted Alias Push
@@ -383,7 +389,7 @@ requests.post(f"https://{OPN_HOST}/api/firewall/alias/addItem",
     auth=(OPN_KEY, OPN_SECRET), json=alias_data, verify=False)
 requests.post(f"https://{OPN_HOST}/api/firewall/alias/reconfigure",
     auth=(OPN_KEY, OPN_SECRET), verify=False)
-! OPNsense returns HTTP 200 even for validation failures — always check JSON body
+# OPNsense may return HTTP 200 with a failed result in the JSON body. Always inspect the response body.
 ```
 
 ### Break/Fix
@@ -407,10 +413,10 @@ OPNsense as unified security enforcement for the entire homelab. AD auth, cross-
 ### Phase 1 — Readiness Audit
 
 ```bash
-ping 192.168.20.11    ! Windows NPS reachable
-ping <wazuh-ip>       ! Wazuh reachable
-ps aux | grep suricata ! IDS running
-grep -R "Wazuh" /usr/local/etc/syslog-ng.conf.d/ ! syslog active
+ping 192.168.20.11     # Windows NPS reachable
+ping <wazuh-ip>        # Wazuh reachable
+ps aux | grep suricata # IDS running
+grep -R "Wazuh" /usr/local/etc/syslog-ng.conf /usr/local/etc/syslog-ng.conf.d /var/etc 2>/dev/null # syslog active
 ```
 
 ### Phase 2 — AD RADIUS Auth for OPNsense Admin
@@ -432,6 +438,8 @@ TEST: login with AD credential → success
       disable RADIUS server → local admin fallback works
 ```
 
+Store the RADIUS shared secret in the password manager or Windows/NPS secure admin notes. Do not commit it to Git, screenshots, or phase evidence.
+
 ### Phase 3 — Cross-Family Policy Matrix
 
 | Source | Destination | Rule |
@@ -451,7 +459,7 @@ TEST: login with AD credential → success
 3. Kali ping 192.168.250.10 → fails
 4. Observe simultaneously:
    OPNsense: Firewall → Log Files → Live View → block event
-   Suricata: Services → IDS → Alerts → alert appears
+   Suricata: Services → Intrusion Detection → Alerts → alert appears
    Wazuh: dashboard → OPNsense firewall event indexed
 5. Remove block rule → ping succeeds again
 6. Record timestamps for each observation

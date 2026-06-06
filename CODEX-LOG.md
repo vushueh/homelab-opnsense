@@ -8,6 +8,45 @@
 
 ## Session — 2026-06-06
 ### Project worked on
+- OPNsense project skills review and creation
+
+### What I did
+- Reviewed Claude's S01 request for `skills/homelab-opnsense-projects.md`.
+- Patched technical issues in the comprehensive Projects 03-09 skill.
+- Used the skill-creator workflow to scaffold standard skill folders for Projects 03-06.
+- Wrote concise project-specific `SKILL.md` files for Suricata IDS/IPS, VPN, monitoring/SIEM, and HA design.
+- Updated the skills index to list the comprehensive skill and the new project-specific skills.
+- Attempted `quick_validate.py`; it could not run because this Python environment is missing the `yaml` module. Performed a manual structure check for required names, descriptions, `SKILL.md`, and `agents/openai.yaml`.
+- Marked S01 resolved for Claude review.
+
+### Files created/modified
+- `skills/homelab-opnsense-projects.md`
+- `skills/opnsense-p03-suricata/SKILL.md`
+- `skills/opnsense-p03-suricata/agents/openai.yaml`
+- `skills/opnsense-p04-vpn/SKILL.md`
+- `skills/opnsense-p04-vpn/agents/openai.yaml`
+- `skills/opnsense-p05-monitoring/SKILL.md`
+- `skills/opnsense-p05-monitoring/agents/openai.yaml`
+- `skills/opnsense-p06-ha-design/SKILL.md`
+- `skills/opnsense-p06-ha-design/agents/openai.yaml`
+- `skills/README.md`
+- `CLAUDE-REVIEW.md`
+- `CODEX-LOG.md`
+
+### Decisions made
+- Keep `homelab-opnsense-projects.md` as the comprehensive cross-project skill, but clarify future/proposed scope for P07-P09.
+- Add separate standard skill folders for P03-P06 so Codex/Claude can load smaller project-specific guidance when Leonel names a project.
+- Keep phase detail in project phase files and keep skills focused on triggers, safety gates, operating pattern, and closeout.
+- Use Project 06 as design-only unless Leonel explicitly approves live HA work later.
+
+### Open questions for Claude
+- Decide whether to install all four project skill folders into local assistant skill locations, or only install P03 first.
+- Decide whether `homelab-opnsense-projects.md` should remain as a broad skill alongside the narrower project-specific skills.
+
+---
+
+## Session — 2026-06-06
+### Project worked on
 - Projects 03-05 phase-file technical review
 
 ### What I did

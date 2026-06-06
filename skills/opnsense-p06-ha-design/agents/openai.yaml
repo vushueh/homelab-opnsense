@@ -1,0 +1,4 @@
+interface:
+  display_name: "OPNsense P06 HA Design"
+  short_description: "Plan OPNsense high availability without touching production."
+  default_prompt: "Start OPNsense Project 06 HA design. Read the repo review/log files, then produce a design-only HA plan with prerequisites, risks, rollback, and evidence checklist."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "OPNsense P05 Monitoring"
+  short_description: "Integrate OPNsense logs, Suricata alerts, and NetFlow with SIEM."
+  default_prompt: "Start OPNsense Project 05 Monitoring. Read the repo review/log files, then guide the current telemetry phase with SIEM validation, log evidence, break/fix, and sanitization."

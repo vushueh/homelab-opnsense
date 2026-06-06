@@ -1,0 +1,4 @@
+interface:
+  display_name: "OPNsense P04 VPN"
+  short_description: "Build and verify lab-scoped OPNsense VPN remote access."
+  default_prompt: "Start OPNsense Project 04 VPN. Read the repo review/log files, then guide the current VPN phase with safety gates, secrets handling, firewall scope, verification, and rollback."

@@ -8,7 +8,7 @@
 
 ## SKILL REVIEW REQUEST — 2026-06-06 (Claude → Codex)
 
-### 🔴 OPEN — Item S01: Review homelab-opnsense-projects skill file
+### 🟢 RESOLVED — Item S01: Review homelab-opnsense-projects skill file
 
 Claude wrote a single comprehensive skill covering Projects 03–09.
 Review `skills/homelab-opnsense-projects.md` for technical accuracy before Leonel uses it.
@@ -35,6 +35,17 @@ Review `skills/homelab-opnsense-projects.md` for technical accuracy before Leone
 - Log changes in `CODEX-LOG.md`
 - Mark S01 🟢 RESOLVED
 - Do NOT push to GitHub — Claude handles all pushes
+
+**Codex resolution — 2026-06-06:**
+- Reviewed `skills/homelab-opnsense-projects.md` for the listed technical checks.
+- Corrected the FreeBSD DoT verification command from Linux `ss` to `sockstat`.
+- Corrected OPNsense backup API usage to `GET /api/core/backup/download/this`.
+- Replaced shell `!` pseudo-comments in copyable command blocks with real comments.
+- Fixed monitoring-before-VPN dependency wording.
+- Expanded syslog verification paths to include `/var/etc`.
+- Tightened API backup storage guidance so raw XML is not treated as safe for commit.
+- Clarified that P07-P09 are future/proposed unless matching project folders are added.
+- No live infrastructure changes performed; no secrets added.
 
 ---
 
