@@ -53,9 +53,9 @@ Alta Labs Route10
 | 04 | [VPN Remote Access](projects/04-vpn-remote-access/) | Planned | Build controlled remote access into lab networks |
 | 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Planned | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
 | 06 | [High Availability Design](projects/06-high-availability/) | Future | Design CARP/pfsync HA requirements and failover testing |
-| 07 | Future: DNS and DHCP Services | Future | Harden DNS/DHCP design and document resolver behavior |
-| 08 | Future: Policy Automation | Future | Explore API/export workflows, backups, and repeatable change control |
-| 09 | Future: Cross-Family Firewall Capstone | Future | Connect CML, Physical CCNA, Windows AD, SOC, and OPNsense policies |
+| 07 | [DNS and DHCP Services](projects/07-dns-dhcp-services/) | Future | Harden DNS/DHCP design and document resolver behavior |
+| 08 | [Policy Automation](projects/08-policy-automation/) | Future | Explore API/export workflows, backups, and repeatable change control |
+| 09 | [Cross-Family Firewall Capstone](projects/09-cross-family-firewall-capstone/) | Future | Connect CML, Physical CCNA, Windows AD, SOC, and OPNsense policies |
 
 ## Standard Project Structure
 
