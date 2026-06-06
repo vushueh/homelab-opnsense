@@ -1,135 +1,61 @@
-# OPNsense Projects
+# OPNsense Project Index
 
-This directory contains individual projects built on the OPNsense infrastructure.
+This directory contains the OPNsense firewall family projects. Each project should be practical, screenshot-friendly, and connected to a real operational skill.
 
-## Completed Projects
+## Current Projects
 
-### [01. Baseline Deployment](01-baseline-deployment/)
-**Status**: ✅ Complete  
-**Duration**: 3 weeks  
-**Phases**: 1-10
+| # | Project | Status | Main Skill |
+|---|---------|--------|------------|
+| 01 | [Baseline Router Deployment](01-baseline-deployment/) | Complete | Deploy OPNsense on Hyper-V in router mode |
+| 02 | [VLAN Segmentation](02-vlan-segmentation/) | Complete | Build routed lab VLANs with DHCP, NAT, and firewall rules |
+| 03 | [IDS/IPS with Suricata](03-ids-ips-suricata/) | Planned | Detect and block lab attacks using Suricata |
+| 04 | [VPN Remote Access](04-vpn-remote-access/) | Planned | Build controlled remote access to lab networks |
+| 05 | [Monitoring and SIEM Integration](05-monitoring-integration/) | Planned | Export logs/flows to Wazuh or other monitoring tools |
+| 06 | [High Availability Design](06-high-availability/) | Future | Design and test HA requirements when hardware is available |
 
-Complete journey from bridge mode failures to production-ready router mode deployment on Hyper-V.
+## Recommended Order
 
-**Key Achievements**:
-- Router mode implementation
-- 3 physical interfaces + 4 VLANs
-- Production network isolation
-- 24/7 uptime capability
+1. Finish Project 03 first because it turns the firewall into a security sensor.
+2. Then Project 05, because monitoring makes Suricata and firewall rule behavior visible.
+3. Then Project 04, because remote access should be built after logging and alerting exist.
+4. Keep Project 06 as design-only until a second firewall instance or host exists.
 
-[View Documentation →](01-baseline-deployment/README.md)
+## Standard Project Folder
 
----
-
-### [02. VLAN Segmentation](02-vlan-segmentation/)
-**Status**: ✅ Complete  
-**Duration**: Part of baseline deployment  
-**Phases**: 8-10
-
-Comprehensive VLAN configuration for network segmentation.
-
-**Networks Created**:
-- VLAN 30: Lab/Test Devices (192.168.30.0/24)
-- VLAN 40: Additional Segment (192.168.40.0/24)
-- VLAN 50: Reserved (192.168.50.0/24)
-- VLAN 250: Attack Lab (192.168.250.0/24)
-
-[View Documentation →](02-vlan-segmentation/README.md)
-
----
-
-## Planned Projects
-
-### [03. IDS/IPS with Suricata](03-ids-ips-suricata/)
-**Status**: 📋 Planned  
-**Estimated Duration**: 3 hours  
-**Phase**: 11
-
-Deploy Suricata intrusion detection/prevention system.
-
-**Objectives**:
-- Enable IDS/IPS on all interfaces
-- Configure rule sets (ET Open, Abuse.ch)
-- Set up active blocking (IPS mode)
-- Configure alerting and logging
-
-[View Planning →](03-ids-ips-suricata/README.md)
-
----
-
-### [04. VPN Remote Access](04-vpn-remote-access/)
-**Status**: 📋 Planned  
-**Estimated Duration**: 2 hours  
-**Phase**: 13
-
-Configure OpenVPN for remote access to inspection network.
-
-**Objectives**:
-- OpenVPN server configuration
-- Client certificate generation
-- Split-tunnel routing
-- Access to lab VMs
-
-[View Planning →](04-vpn-remote-access/README.md)
-
----
-
-### [05. Monitoring Integration](05-monitoring-integration/)
-**Status**: 📋 Planned  
-**Estimated Duration**: 4 hours  
-**Phase**: 12
-
-Integrate OPNsense with monitoring and SIEM systems.
-
-**Objectives**:
-- Netflow export configuration
-- Remote syslog setup
-- Wazuh SIEM integration
-- Dashboard creation
-
-[View Planning →](05-monitoring-integration/README.md)
-
----
-
-### [06. High Availability](06-high-availability/)
-**Status**: 💡 Future Concept  
-**Estimated Duration**: 8 hours  
-**Phase**: 14
-
-Deploy second OPNsense instance for HA configuration.
-
-**Requirements**:
-- Second Hyper-V host
-- CARP configuration
-- State synchronization
-- Failover testing
-
-**Note**: Requires additional hardware investment
-
-[View Concept →](06-high-availability/README.md)
-
----
-
-## Project Status Legend
-
-- ✅ **Complete**: Project finished and documented
-- 🔄 **In Progress**: Actively working on project
-- 📋 **Planned**: Documented plan, ready to start
-- 💡 **Future**: Concept phase, requires prerequisites
-
----
-
-## Contributing to Projects
-
-Each project follows this structure:
-```
+```text
 project-name/
-├── README.md           # Main documentation
-├── planning.md         # Planning and requirements
-├── implementation.md   # Step-by-step guide
-├── testing.md          # Testing procedures
-├── lessons-learned.md  # Retrospective
-└── configs/            # Configuration files
+|-- README.md
+|-- phases/
+|   |-- phase-1-audit.md
+|   |-- phase-2-build.md
+|   |-- phase-3-verify.md
+|   |-- phase-4-breakfix.md
+|   `-- phase-5-document.md
+|-- configs/
+|-- verification/
+`-- troubleshooting/
 ```
 
-Feel free to suggest new projects or improvements!
+## Standard Phase Pattern
+
+Every phase should say who owns the work:
+
+- **[LEONEL]** GUI clicks, screenshots, physical cabling, console work.
+- **[CLAUDE]** live SSH/API execution, final config review, GitHub push.
+- **[CODEX]** command drafting, configs, runbooks, troubleshooting logic.
+
+Every project should include:
+
+- audit / current state capture
+- build steps
+- verification steps
+- break/fix challenge
+- documentation checklist
+- rollback or recovery note
+
+## Security Rules
+
+- Never publish raw OPNsense XML exports unless sanitized.
+- Remove VPN private keys, API keys, shared secrets, account hashes, certificates, and public WAN details before committing.
+- Do not modify production VLAN 10 or VLAN 20 without a dedicated approved migration project.
+- Treat Route10 as the production gateway unless a future project explicitly changes that.
