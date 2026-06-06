@@ -23,6 +23,28 @@ This is not only a setup archive. It should become a skill-building firewall adm
 | VLAN 250 | 192.168.250.0/24, gateway 192.168.250.1 |
 | Production router | Alta Labs Route10, production path stays separate |
 
+## Edit Tier Rules
+
+All three parties (Claude, Codex, Leonel) must follow this model.
+
+### Tier 1 — Local repo (default for all content work)
+Use for: phase files, project READMEs, configs, scripts, docs, skill files.
+Local path (Windows): `E:\Homelab-Repos\family-projects\homelab-opnsense\`
+Local path (WSL):      `/mnt/e/Homelab-Repos/family-projects/homelab-opnsense/`
+- Codex writes here directly (open this folder as the Codex workspace/project).
+- Claude reads and edits files here directly.
+- Session start: `git pull` — session end: `git add -A && git commit && git push`.
+
+### Tier 2 — GitHub API (exception only)
+Use for: bridge file quick patches (CLAUDE-REVIEW.md, CODEX-LOG.md) between sessions when no local checkout is open.
+Never: phase content, skill files, configs, or any file over ~5KB.
+Who pushes: Claude by default. Codex may push bridge files only when Leonel explicitly asks.
+
+### Tier 3 — Live infrastructure (approval required)
+Use for: SSH commands, OPNsense web UI changes, firewall rule edits.
+Who: Leonel performs all GUI actions. Claude coordinates SSH with explicit approval per action.
+Never: Codex does not execute live infrastructure commands.
+
 ## Critical Rules
 
 - Do not modify production VLAN 10 or VLAN 20 without explicit approval.
