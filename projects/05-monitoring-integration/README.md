@@ -30,13 +30,11 @@ Send OPNsense telemetry to monitoring and security platforms so firewall decisio
 
 | Phase | Goal |
 |-------|------|
-| 1 | Audit current logging and monitoring targets |
-| 2 | Configure remote syslog safely |
-| 3 | Send firewall and DHCP/DNS logs |
-| 4 | Add Suricata alert forwarding after Project 03 |
-| 5 | Validate events in SIEM/monitoring tool |
-| 6 | Break/fix: logs stop arriving |
-| 7 | Document dashboards and runbook |
+| [1](phases/phase-1-audit-logging.md) | Audit current logging state and choose SIEM target |
+| [2](phases/phase-2-syslog-config.md) | Configure remote syslog to SIEM |
+| [3](phases/phase-3-suricata-netflow.md) | Add Suricata alert forwarding and NetFlow |
+| [4](phases/phase-4-dashboards-and-breakfix.md) | Validate SIEM dashboards and break/fix log pipeline |
+| [5](phases/phase-5-document-and-close.md) | Sanitize evidence and close project |
 
 ## Cross-Family Links
 

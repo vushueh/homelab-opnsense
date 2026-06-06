@@ -28,13 +28,11 @@ Build controlled remote access into selected lab networks without exposing the f
 
 | Phase | Goal |
 |-------|------|
-| 1 | Audit current remote access paths and define allowed networks |
-| 2 | Choose VPN technology and document why |
-| 3 | Build VPN server/profile in GUI |
-| 4 | Create firewall rules for least-privilege access |
-| 5 | Test remote client access |
-| 6 | Break/fix: wrong route or blocked VPN rule |
-| 7 | Document and sanitize evidence |
+| [1](phases/phase-1-audit-and-design.md) | Audit current remote access paths and define allowed networks |
+| [2](phases/phase-2-build-vpn-server.md) | Build WireGuard server instance and client key pair |
+| [3](phases/phase-3-firewall-rules.md) | Create firewall rules for least-privilege access |
+| [4](phases/phase-4-test-and-breakfix.md) | Test remote client access and break/fix scenarios |
+| [5](phases/phase-5-document-and-close.md) | Sanitize evidence and close project |
 
 ## Safety Gates
 

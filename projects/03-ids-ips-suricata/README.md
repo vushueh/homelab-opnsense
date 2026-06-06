@@ -34,10 +34,10 @@ Turn OPNsense into a real IDS/IPS sensor for lab traffic. Start in IDS alert-onl
 |-------|------|------|
 | 1 | [Audit and Safety Plan](phases/phase-1-audit-and-safety.md) | Confirm interfaces, backups, rules, and logging baseline |
 | 2 | [Enable IDS Mode](phases/phase-2-enable-ids-mode.md) | Enable Suricata in alert-only mode |
-| 3 | Verify Alerts | Generate safe test traffic and confirm alerts |
-| 4 | Tune Rules | Reduce noise and document chosen rule sets |
-| 5 | Break/Fix | Mis-scope an interface or disable a rule, diagnose, restore |
-| 6 | IPS Decision | Decide whether blocking mode is appropriate |
+| 3 | [Verify Alerts](phases/phase-3-verify-alerts.md) | Generate safe test traffic and confirm alerts |
+| 4 | [Tune Rules](phases/phase-4-tune-rules.md) | Reduce noise and document chosen rule sets |
+| 5 | [Break/Fix](phases/phase-5-break-fix.md) | Mis-scope an interface or disable a rule, diagnose, restore |
+| 6 | [IPS Decision](phases/phase-6-ips-decision.md) | Decide whether blocking mode is appropriate |
 
 ## Safety Gates
 
