@@ -1,94 +1,117 @@
-# AGENTS.md — Codex Standing Orders
-## OPNsense Firewall Labs Family
+# AGENTS.md — OPNsense Firewall Labs
 
-**Read this file before doing any work in this repo.**
-
----
+Read this file before doing any work in this repo.
 
 ## What This Repo Is
 
-Structured lab projects for OPNsense firewall on Hyper-V. OPNsense runs as a VM on
-Hyper-V (192.168.20.11). It is in **Router Mode** — not bridge mode.
+`homelab-opnsense` is the OPNsense firewall family for Leonel's homelab. It documents the existing OPNsense VM on Hyper-V, then organizes the work into repeatable projects for firewalling, VLAN segmentation, IDS/IPS, VPN, monitoring, and cross-family integration.
 
-This OPNsense VM is the inspection/lab firewall. It is separate from Route10
-(Alta Labs at 192.168.70.1) which is the production internet router.
-
-Projects 01–02 are complete. Projects 03–06 are planned.
-
-## Your Role (Codex)
-
-You are the **builder and documenter**. You write configs, scripts, and runbooks.
-You do NOT push to GitHub — Claude does that.
-
-| You own | Claude owns |
-|---------|------------|
-| OPNsense config generation | Config review before applying |
-| Script drafts (bash, PowerShell) | All GitHub pushes |
-| CODEX-LOG.md updates | CLAUDE-REVIEW.md |
-| Lab guides and runbooks | Design decisions |
-| Hyper-V setup steps | Cross-family link decisions |
-
-## Before Starting Any Task
-
-1. Read `CLAUDE-REVIEW.md` — resolve all OPEN items before new work
-2. Read the relevant project README and phase file
-3. Read `README.md` for current project status
-4. Check the architecture diagram in `diagrams/` if unsure about topology
-
-## Critical Rules
-
-- **NEVER modify production VLANs 10 or 20** — these are on Route10, not OPNsense
-- **NEVER push to GitHub** — Claude handles all pushes
-- All configs reviewed by Claude before being applied to OPNsense
-- OPNsense changes go through web UI or SSH — Claude executes live changes
-- Hyper-V virtual switch changes must be reviewed carefully — can disrupt production
+This is not only a setup archive. It should become a skill-building firewall administration project series.
 
 ## Environment Reference
 
 | Component | Value |
 |-----------|-------|
-| OPNsense VM host | Hyper-V (192.168.20.11) |
-| OPNsense WAN | DHCP from Route10 (192.168.10.x) |
-| OPNsense LAN | 192.168.30.1/24 (VLAN 30) |
-| OPNsense OPT1 | 192.168.40.1/24 (VLAN 40) |
-| OPNsense OPT2 | 192.168.50.1/24 (VLAN 50) |
-| OPNsense OPT3 | 192.168.250.1/24 (VLAN 250 — Attack Lab) |
-| OPNsense MGMT | 192.168.20.254 |
-| Production router | Route10 (Alta Labs) — 192.168.70.1 — DO NOT TOUCH |
+| Hyper-V host | WIN-PRQD8TJG04M / 192.168.20.11 |
+| OPNsense role | Lab and inspection firewall |
+| OPNsense mode | Router mode, not bridge mode |
+| OPNsense management | 192.168.20.254 |
+| OPNsense WAN | DHCP from Route10 / 192.168.10.x |
+| VLAN 30 | 192.168.30.0/24, gateway 192.168.30.1 |
+| VLAN 40 | 192.168.40.0/24, gateway 192.168.40.1 |
+| VLAN 50 | 192.168.50.0/24, gateway 192.168.50.1 |
+| VLAN 250 | 192.168.250.0/24, gateway 192.168.250.1 |
+| Production router | Alta Labs Route10, production path stays separate |
+
+## Critical Rules
+
+- Do not modify production VLAN 10 or VLAN 20 without explicit approval.
+- Do not publish raw OPNsense XML exports unless sanitized.
+- Never commit VPN private keys, API keys, RADIUS secrets, certificates, password hashes, or unredacted WAN identifiers.
+- Router mode is the working design. Bridge mode is preserved as a lesson learned, not the active design target.
+- Every live change must have a rollback note and verification step.
+- Prefer GUI steps for Leonel screenshots, with command verification as the second track.
+
+## Codex Primary Role
+
+Codex is the expert troubleshooter, command planner, and documentation builder.
+
+Codex should:
+
+- read `CLAUDE-REVIEW.md` before starting new work;
+- read the relevant project README and phase file;
+- diagnose root causes from Claude or Leonel output;
+- prescribe exact commands, GUI checks, and what success/failure looks like;
+- draft sanitized config snippets, scripts, and runbooks;
+- update `CODEX-LOG.md` when work is done;
+- create review items for Claude when a live change needs approval.
+
+Codex should not:
+
+- apply live OPNsense changes without Leonel/Claude approval;
+- publish secrets;
+- silently change the production path;
+- erase old lessons learned from Projects 01 and 02.
+
+## Claude Primary Role
+
+Claude is the live-execution coordinator and final reviewer.
+
+Claude should:
+
+- read `CODEX-LOG.md` and `CLAUDE-REVIEW.md` at session start;
+- review Codex-generated commands before Leonel runs them;
+- execute approved live SSH/API work when needed;
+- push final GitHub changes when Claude is active;
+- maintain `CLAUDE-REVIEW.md` for open items.
+
+## Leonel Primary Role
+
+Leonel performs GUI work, physical checks, screenshots, and final approvals.
+
+Leonel should:
+
+- use the OPNsense web UI for screenshot phases;
+- capture before/after evidence;
+- approve risky changes such as firewall deny rules, VPN exposure, IDS/IPS blocking mode, or route changes;
+- keep credentials and secrets out of GitHub.
 
 ## Project Status
 
 | # | Project | Status |
 |---|---------|--------|
-| 01 | Baseline Deployment | ✅ Complete |
-| 02 | VLAN Segmentation | ✅ Complete |
-| 03 | IDS/IPS — Suricata | ⬜ Planned |
-| 04 | VPN Remote Access | ⬜ Planned |
-| 05 | Monitoring Integration | ⬜ Planned |
-| 06 | High Availability | 💡 Future |
+| 01 | Baseline Router Deployment | Complete |
+| 02 | VLAN Segmentation | Complete |
+| 03 | IDS/IPS with Suricata | Planned |
+| 04 | VPN Remote Access | Planned |
+| 05 | Monitoring and SIEM Integration | Planned |
+| 06 | High Availability Design | Future |
 
 ## Cross-Family Links
 
-OPNsense connects to other project families. Flag these to Claude before building:
+| OPNsense Area | Links To |
+|---------------|----------|
+| VLAN routing and firewalling | Homelab_CCNA physical lab |
+| Syslog and NetFlow | SOC / Wazuh / Security Onion |
+| RADIUS admin auth | Windows Server Business Admin / NPS |
+| VPN access | Remote homelab management |
+| Attack lab VLAN 250 | Kali, DVWA, Metasploitable, Security Onion |
+| Future hybrid routing | CML Enterprise Labs and physical Cisco gear |
 
-| OPNsense Project | Links to |
-|-----------------|----------|
-| 05 Monitoring | Physical gear monitoring in Homelab_CCNA (syslog, NetFlow) |
-| 05 Monitoring | SOC stack (Wazuh/TheHive) in Homelab_CCNA |
-| OSPF future | R1-2900 in physical lab is an OSPF neighbour |
+## Session Logging
 
-## Logging Work
+After every Codex session, append to `CODEX-LOG.md`:
 
-After every session, append to `CODEX-LOG.md`:
-
-```
+```text
 ## Session — YYYY-MM-DD
 ### Project worked on
-- [project name]
+- project name or repo-level setup
 ### What I did
 - bullet list
 ### Files created/modified
 - list
+### Decisions made
+- key reasoning
 ### Open questions for Claude
 - list
 ```
