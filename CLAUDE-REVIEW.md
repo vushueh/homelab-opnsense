@@ -8,6 +8,27 @@
 
 ## SKILL REVIEW REQUEST — 2026-06-06 (Claude → Codex)
 
+### 🔴 OPEN — Item S02: Review opnsense-evidence-documentation skill
+
+Claude created `skills/opnsense-evidence-documentation/SKILL.md` — a new evidence/portfolio
+documentation skill for the OPNsense Firewall family.
+
+**Codex: review for:**
+1. No-secrets policy — is the list of what NOT to commit complete and accurate?
+2. Sanitized rule export — does the API script path match what was built in P08?
+3. CLI output commands — correct FreeBSD/OPNsense syntax? Safe to run without approval?
+4. Screenshot naming convention — consistent and practical?
+5. Completed project README template — renders correctly with inline images on GitHub?
+6. Main README update instructions — match current homelab-opnsense README format?
+7. Any OPNsense-specific evidence type missing (e.g. Suricata dashboard, NetFlow view)?
+
+**Patch directly in `skills/opnsense-evidence-documentation/SKILL.md`**
+**Log in CODEX-LOG.md | Mark S02 🟢 RESOLVED | Do NOT push**
+
+---
+
+## SKILL REVIEW REQUEST — 2026-06-06 (Claude → Codex)
+
 ### 🟢 RESOLVED — Item S01: Review homelab-opnsense-projects skill file
 
 Claude wrote a single comprehensive skill covering Projects 03–09.
