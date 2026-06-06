@@ -28,12 +28,12 @@ The outcome is a GitHub portfolio showing:
 ## Folder Structure Per Project
 
 ```
-projects/NN-project-name/
+projects/<number>-<project-name>/
 ├── README.md
 ├── phases/
 ├── configs/
-│   ├── sanitized-rule-export-before-pNN.json   ← firewall rules (sanitized)
-│   └── sanitized-rule-export-after-pNN.json
+│   ├── sanitized-rule-summary-before-pNN.md    ← rules summarized, no secrets
+│   └── sanitized-rule-summary-after-pNN.md
 ├── verification/
 │   ├── screenshots/             ← all GUI screenshots
 │   └── cli-outputs/             ← CLI command outputs (sanitized)
@@ -60,7 +60,7 @@ projects/NN-project-name/
 ```
 ✅ Firewall rule screenshots (blur WAN IP if visible)
 ✅ Suricata alert list (blur source IPs from real attack traffic)
-✅ Firewall rule JSON export (contains no secrets — just rules)
+✅ Sanitized firewall rule summary or reviewed API export
 ✅ CLI outputs from read-only commands
 ✅ WireGuard client config TEMPLATE (placeholder values only)
 ✅ API script without credentials (env vars only)
@@ -104,20 +104,28 @@ Examples:
 
 ---
 
-## Sanitized Firewall Rule Export
+## Sanitized Firewall Rule Evidence
 
-Use the P08 API script to export rules:
-```python
-# Run export-rules.py → saves to exports/firewall-rules/rules-YYYYMMDD-HHMM.json
-# Safe to commit — contains only rule names, interfaces, actions
-# Does NOT contain secrets
-```
+Use the P08-approved rule export method only after Project 08 creates and reviews it.
+This repo does not assume `scripts/export-rules.py` already exists.
+
+If no reviewed export script exists yet, create a manual summary instead:
 
 Rename for the project:
 ```
-configs/sanitized-rule-export-before-p04.json
-configs/sanitized-rule-export-after-p04.json
+configs/sanitized-rule-summary-before-p04.md
+configs/sanitized-rule-summary-after-p04.md
 ```
+
+Recommended fields:
+```markdown
+| Interface | Action | Source | Destination | Port | Description |
+|-----------|--------|--------|-------------|------|-------------|
+| VPN_WG | Pass | VPN subnet | VLAN 30 | Any | VPN to lab services |
+```
+
+Before committing any API export, review it for WAN IPs, aliases containing real public values,
+VPN objects, credentials, descriptions with private notes, and any identifiers outside lab scope.
 
 ---
 
@@ -129,9 +137,8 @@ configs/sanitized-rule-export-after-p04.json
 # Take a screenshot of the relevant GUI section before changes
 # Example: Services → Intrusion Detection → Administration (before enabling)
 
-# Export firewall rules (sanitized — safe)
-python scripts/export-rules.py
-# Move output to configs/sanitized-rule-export-before-pNN.json
+# Save firewall rule before-state as a sanitized summary or reviewed P08 export
+# Move output to configs/sanitized-rule-summary-before-pNN.md
 ```
 
 ### Step 2 — Do the Work
@@ -144,9 +151,8 @@ Follow the phase file Track A (GUI):
 
 ```sh
 # Screenshot after changes applied
-# Re-export rules for after-state comparison
-python scripts/export-rules.py
-# Move to configs/sanitized-rule-export-after-pNN.json
+# Re-save rules for after-state comparison
+# Move to configs/sanitized-rule-summary-after-pNN.md
 ```
 
 ### Step 4 — CLI Verification (approved commands only)
@@ -164,12 +170,12 @@ ifconfig | grep -A2 '^wg'                       → confirm wgX interface (no ke
 # wg show → shows handshake info but NO private keys — safe to screenshot
 
 # P05 Syslog:
-grep -R "SIEM-IP-PLACEHOLDER" /usr/local/etc/syslog-ng.conf.d/   → confirm configured
+grep -R "SIEM-IP-PLACEHOLDER" /usr/local/etc/syslog-ng.conf /usr/local/etc/syslog-ng.conf.d /var/etc 2>/dev/null   → confirm configured
 tail -n 5 /var/log/system/latest.log            → confirm log generation
 
 # P07 DNS:
 dig @127.0.0.1 google.com | grep -E "status|ANSWER"    → resolver working
-sockstat -4 | grep :853                                 → DoT connections
+sockstat -4 -6 -c | grep ':853'                         → DoT connections
 ```
 
 ### Step 5 — Break/Fix Log

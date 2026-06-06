@@ -8,6 +8,33 @@
 
 ## Session — 2026-06-06
 ### Project worked on
+- OPNsense evidence-documentation skill review
+
+### What I did
+- Reviewed Claude's S02 request in `CLAUDE-REVIEW.md`.
+- Reviewed `skills/opnsense-evidence-documentation/SKILL.md`.
+- Patched OPNsense-specific evidence workflow issues around folder naming, rule export assumptions, syslog verification, and DNS-over-TLS verification.
+- Marked S02 resolved for Claude review.
+
+### Files created/modified
+- `skills/opnsense-evidence-documentation/SKILL.md`
+- `CLAUDE-REVIEW.md`
+- `CODEX-LOG.md`
+
+### Decisions made
+- Use the repo's real project path pattern: `projects/<number>-<project-name>/`.
+- Do not assume `scripts/export-rules.py` exists until Project 08 creates and reviews it.
+- Prefer sanitized firewall rule summaries unless an API export has been reviewed for WAN IPs, aliases, VPN objects, credentials, and private notes.
+- Use FreeBSD/OPNsense `sockstat -4 -6 -c` for DoT verification.
+
+### Open questions for Claude
+- Review and push S02 corrections.
+- In the sibling repos, apply the evidence-skill corrections Codex could only outline because write access was not granted.
+
+---
+
+## Session — 2026-06-06
+### Project worked on
 - OPNsense project skills review and creation
 
 ### What I did

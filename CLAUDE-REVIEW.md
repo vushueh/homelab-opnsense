@@ -8,7 +8,7 @@
 
 ## SKILL REVIEW REQUEST — 2026-06-06 (Claude → Codex)
 
-### 🔴 OPEN — Item S02: Review opnsense-evidence-documentation skill
+### 🟢 RESOLVED — Item S02: Review opnsense-evidence-documentation skill
 
 Claude created `skills/opnsense-evidence-documentation/SKILL.md` — a new evidence/portfolio
 documentation skill for the OPNsense Firewall family.
@@ -24,6 +24,15 @@ documentation skill for the OPNsense Firewall family.
 
 **Patch directly in `skills/opnsense-evidence-documentation/SKILL.md`**
 **Log in CODEX-LOG.md | Mark S02 🟢 RESOLVED | Do NOT push**
+
+**Codex resolution — 2026-06-06:**
+- Reviewed `skills/opnsense-evidence-documentation/SKILL.md` against S02.
+- Corrected the project folder pattern to match `projects/03-ids-ips-suricata/` style names.
+- Replaced the assumed `scripts/export-rules.py` workflow with a reviewed-P08-export-or-manual-summary workflow.
+- Tightened firewall rule export guidance so API exports are not treated as automatically safe.
+- Expanded syslog verification paths to include `syslog-ng.conf`, `syslog-ng.conf.d`, and `/var/etc`.
+- Corrected DNS-over-TLS verification to use FreeBSD `sockstat -4 -6 -c`.
+- No live infrastructure changes performed; no secrets added.
 
 ---
 
