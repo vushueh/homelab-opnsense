@@ -6,6 +6,38 @@
 
 ## Active Items
 
+## SKILL REVIEW REQUEST — 2026-06-06 (Claude → Codex)
+
+### 🔴 OPEN — Item S01: Review homelab-opnsense-projects skill file
+
+Claude wrote a single comprehensive skill covering Projects 03–09.
+Review `skills/homelab-opnsense-projects.md` for technical accuracy before Leonel uses it.
+
+**Check for:**
+1. OPNsense GUI paths — correct menu locations for OPNsense 24.x?
+2. CLI commands — correct FreeBSD/OPNsense shell syntax?
+3. VLAN numbers — lab VLANs 30/40/50/250 only, never 10/20
+4. Safety gates present — no IPS blocking, no WAN rules without approval
+5. Secrets handling — no keys or credentials referenced in commands
+
+**Specific items to verify:**
+- P03: `grep '"event_type":"alert"' /var/log/suricata/eve.json` — correct path for this OPNsense version?
+- P04: WireGuard `Instances` tab — correct for OPNsense 24.x (not Local tab)?
+- P04: `ifconfig | grep -A3 '^wg'` — correct CLI to verify wgX interface?
+- P05: `tail -n 20 /var/log/filter/latest.log` — correct log path (not legacy `clog`)?
+- P05: `grep -R "<SIEM-IP>" /usr/local/etc/syslog-ng.conf /usr/local/etc/syslog-ng.conf.d/` — correct paths?
+- P07: `ss -tnp | grep :853` — correct command to verify DoT connections on OPNsense/FreeBSD?
+- P08: `/api/core/backup/download` — correct API endpoint for config backup in OPNsense 24.x?
+- P09: NPS RADIUS client config — shared secret storage guidance correct?
+
+**After review:**
+- Patch errors directly in `skills/homelab-opnsense-projects.md`
+- Log changes in `CODEX-LOG.md`
+- Mark S01 🟢 RESOLVED
+- Do NOT push to GitHub — Claude handles all pushes
+
+---
+
 ## DESIGN REVIEW REQUEST — 2026-06-06 (Claude → Codex)
 
 ### 🟢 RESOLVED — Item D01: Review OPNsense P03-P05 Phase Files
