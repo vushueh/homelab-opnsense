@@ -1,92 +1,106 @@
-# WORKFLOW.md — How This Family Works
+# WORKFLOW.md — OPNsense Family Workflow
 
 ## Trigger Phrase
 
 Say **`opnsense project`** to work in this repo.
 
-When triggered, Claude will:
-1. Read this WORKFLOW.md and README.md
-2. Check CLAUDE-REVIEW.md for open items
-3. Check CODEX-LOG.md for latest Codex work
-4. Report current project status and exact next step
+When triggered, the active assistant should:
 
----
+1. Read `AGENTS.md`.
+2. Read `CLAUDE-REVIEW.md` for open items.
+3. Read `CODEX-LOG.md` for the latest work.
+4. Read `README.md` and the relevant project README.
+5. Report the current status and the next safe step.
 
 ## Trigger Phrases
 
 | Say this | Means |
 |----------|-------|
 | `opnsense project` | Switch context to this repo |
-| `start opnsense project [N]` | Begin project N |
-| `check what Codex did` | Claude reads CODEX-LOG.md and summarises |
-| `check open items` | Claude lists OPEN items in CLAUDE-REVIEW.md |
-| `push to github` | Claude compiles work and pushes |
+| `start opnsense project 03` | Begin the Suricata IDS/IPS project |
+| `opnsense next phase` | Continue the current project phase |
+| `check what Codex did` | Read and summarize `CODEX-LOG.md` |
+| `check open items` | Read and summarize `CLAUDE-REVIEW.md` |
+| `opnsense screenshot phase` | Use the GUI-first steps and capture evidence |
+| `opnsense break fix` | Run the planned troubleshooting exercise |
 
----
+## Standard Project Cycle
 
-## Project Cycle
-
-Every project follows this cycle — consistent across all families:
-
-```
-1. Audit current state  (show/check commands, save before-state)
-2. Build                (apply config via web UI or SSH)
-3. Verify              (test connectivity, check logs)
-4. Break/Fix           (deliberate fault → diagnose → restore)
-5. Document            (save configs + outputs)
-6. Push to GitHub      (Claude does this)
-```
-
----
-
-## Folder Structure Per Project
-
-```
-projects/NN-name/
-├── README.md            ← Objective, topology, phase list, status
-├── phases/
-│   ├── phase-1-name.md  ← Steps tagged [LEONEL], [CLAUDE], [CODEX]
-│   └── ...
-├── configs/             ← Before/after OPNsense configs (XML exports)
-├── verification/        ← Screenshots, test outputs
-└── troubleshooting/     ← Break/fix log
+```text
+1. Audit current state
+2. Plan the change and rollback
+3. Build using GUI or reviewed commands
+4. Verify with tests, logs, and screenshots
+5. Break/fix exercise
+6. Document evidence
+7. Push to GitHub when approved
 ```
 
----
+## Standard Project Folder
 
-## Who Does What
+```text
+projects/project-name/
+|-- README.md
+|-- phases/
+|   |-- phase-1-audit.md
+|   |-- phase-2-build.md
+|   |-- phase-3-verify.md
+|   |-- phase-4-breakfix.md
+|   `-- phase-5-document.md
+|-- configs/
+|-- verification/
+`-- troubleshooting/
+```
+
+## Ownership Model
 
 | Task | Owner |
 |------|-------|
-| OPNsense web UI changes | Leonel |
-| Review configs before applying | Claude |
-| SSH to OPNsense | Claude |
-| All GitHub pushes | Claude |
-| Config XML generation | Codex |
-| Script drafts (bash, PowerShell) | Codex |
-| Phase guides and project specs | Claude |
-| CODEX-LOG.md updates | Codex |
-| CLAUDE-REVIEW.md | Claude |
+| OPNsense GUI clicks and screenshots | Leonel |
+| Live OPNsense SSH/API execution | Claude, after approval |
+| Command drafting and troubleshooting plans | Codex |
+| Sanitized config snippets and scripts | Codex |
+| Final review and GitHub push | Claude when active; Codex may patch when Leonel explicitly asks |
+| `CLAUDE-REVIEW.md` | Claude opens items, Codex resolves or comments |
+| `CODEX-LOG.md` | Codex logs its work |
 
----
+## Evidence Standard
 
-## Cross-Family Context
+Every finished phase should have at least one of:
 
-OPNsense connects to other families:
+- screenshot from OPNsense GUI;
+- command output showing state before/after;
+- packet capture or log entry;
+- firewall rule, DHCP lease, route, IDS alert, or VPN session evidence.
 
-| Project | Links to |
-|---------|----------|
-| 05 Monitoring Integration | Physical gear + SOC stack in Homelab_CCNA |
-| OSPF (future) | R1-2900 is an OSPF neighbour in Homelab_CCNA |
+## Safety Gates
 
-Say `homelab expansion` to switch to the Homelab_CCNA family.
+Stop and ask Leonel before:
 
----
+- enabling IPS blocking mode;
+- changing WAN or management rules;
+- modifying production VLAN 10 or VLAN 20;
+- adding port forwards from the internet;
+- changing DHCP on an active segment;
+- importing or restoring full OPNsense XML config;
+- applying VPN or RADIUS shared secrets.
 
-## OPNsense Access
+## Cross-Family Switching
+
+| Phrase | Family |
+|--------|--------|
+| `homelab expansion` | Homelab_CCNA physical/CML bridge family |
+| `windows server project` | Windows Server Business Admin family |
+| `proxmox project` | Homelab management / Proxmox execution |
+| `SNML` | Secure Network Management Labs on VirtualBox |
+| `CML project` | Enterprise Network Labs in Cisco CML |
+
+## OPNsense Access Reference
 
 | Method | Details |
-|--------|--------|
-| Web UI | https://192.168.20.254 (or OPNsense WAN IP) |
+|--------|---------|
+| Web UI | `https://192.168.20.254` |
 | SSH | `ssh root@192.168.20.254` |
-| Hyper-V Console | Hyper-V Manager on 192.168.20.11 |
+| Hyper-V Console | Hyper-V Manager on `WIN-PRQD8TJG04M` / `192.168.20.11` |
+
+Do not commit credentials or unredacted config exports.
