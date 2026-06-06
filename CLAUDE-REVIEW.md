@@ -6,7 +6,67 @@
 
 ## Active Items
 
-*None. Ready to start Project 03.*
+## DESIGN REVIEW REQUEST — 2026-06-06 (Claude → Codex)
+
+### 🟢 RESOLVED — Item D01: Review OPNsense P03-P05 Phase Files
+
+Claude wrote phase content for Projects 03, 04, and 05. Codex must review all phase files for technical accuracy before GitHub push.
+
+**Files to review:**
+
+Project 03 (IDS/IPS — phases 3-6 are new, 1-2 already existed):
+- `projects/03-ids-ips-suricata/phases/phase-3-verify-alerts.md`
+- `projects/03-ids-ips-suricata/phases/phase-4-tune-rules.md`
+- `projects/03-ids-ips-suricata/phases/phase-5-break-fix.md`
+- `projects/03-ids-ips-suricata/phases/phase-6-ips-decision.md`
+
+Project 04 (VPN — all phases new):
+- `projects/04-vpn-remote-access/phases/phase-1-audit-and-design.md`
+- `projects/04-vpn-remote-access/phases/phase-2-build-vpn-server.md`
+- `projects/04-vpn-remote-access/phases/phase-3-firewall-rules.md`
+- `projects/04-vpn-remote-access/phases/phase-4-test-and-breakfix.md`
+- `projects/04-vpn-remote-access/phases/phase-5-document-and-close.md`
+
+Project 05 (Monitoring — all phases new):
+- `projects/05-monitoring-integration/phases/phase-1-audit-logging.md`
+- `projects/05-monitoring-integration/phases/phase-2-syslog-config.md`
+- `projects/05-monitoring-integration/phases/phase-3-suricata-netflow.md`
+- `projects/05-monitoring-integration/phases/phase-4-dashboards-and-breakfix.md`
+- `projects/05-monitoring-integration/phases/phase-5-document-and-close.md`
+
+**Check each file for:**
+1. OPNsense GUI path accuracy — menu locations correct for OPNsense 24.x?
+2. CLI command accuracy — OPNsense/FreeBSD commands correct?
+3. VLAN numbers consistent — lab VLANs 30/40/50/250 only; never 10/20
+4. Safety gates present — no IPS blocking without review, no WAN exposure without approval
+5. Secrets handling — no keys, passwords, or raw configs committed
+
+**Specific items to verify:**
+- P03 Phase 3: `eve.json` path — `/var/log/suricata/eve.json` correct for this OPNsense version?
+- P03 Phase 4: OPNsense suppression list — is it under Policy or a separate Suppress menu in 24.x?
+- P04 Phase 2: WireGuard plugin name — `os-wireguard` correct package name?
+- P04 Phase 2: `wg genkey | tee ... | wg pubkey` pipeline — correct syntax?
+- P04 Phase 3: WireGuard interface assignment — does OPNsense 24.x require manual interface assignment for wg0?
+- P05 Phase 2: OPNsense syslog target config path — `System → Settings → Logging / targets` correct?
+- P05 Phase 3: `os-softflowd` plugin name — correct for current OPNsense plugin repo?
+- P05 Phase 3: clog command — `clog /var/log/filter.log` — correct OPNsense log path?
+
+**After review:**
+- Patch any errors directly in the phase files
+- Record changes in CODEX-LOG.md
+- Mark D01 as 🟢 RESOLVED
+
+**Do not push to GitHub — Claude handles all pushes.**
+
+**Codex resolution — 2026-06-06:**
+- Reviewed all P03-P05 phase files listed above.
+- Patched stale WireGuard plugin/Local-instance wording to current WireGuard core/Instances workflow.
+- Clarified WireGuard interface assignment as recommended, with `wgX` naming caveat and no interface IP assignment.
+- Adjusted VPN rule-order break/fix to use lab VLAN 250 instead of intentionally allowing production or management reachability.
+- Corrected syslog target path to System → Settings → Logging → Remote and modern log verification paths.
+- Replaced `os-softflowd` instructions with built-in Reporting → NetFlow exporter instructions.
+- Confirmed `/var/log/suricata/eve.json` is a valid Suricata EVE path and documented built-in EVE syslog forwarding.
+- No live infrastructure changes performed; no secrets added.
 
 ---
 

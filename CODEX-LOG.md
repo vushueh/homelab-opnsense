@@ -8,6 +8,45 @@
 
 ## Session — 2026-06-06
 ### Project worked on
+- Projects 03-05 phase-file technical review
+
+### What I did
+- Reviewed Claude's D01 request in `CLAUDE-REVIEW.md`.
+- Checked Project 03 Suricata phases 3-6, Project 04 VPN phases 1-5, and Project 05 monitoring phases 1-5 for OPNsense 24.x accuracy and safety gates.
+- Patched stale or risky guidance in the phase files.
+- Marked D01 resolved for Claude review.
+
+### Files created/modified
+- `projects/03-ids-ips-suricata/phases/phase-3-verify-alerts.md`
+- `projects/03-ids-ips-suricata/phases/phase-4-tune-rules.md`
+- `projects/04-vpn-remote-access/phases/phase-2-build-vpn-server.md`
+- `projects/04-vpn-remote-access/phases/phase-3-firewall-rules.md`
+- `projects/04-vpn-remote-access/phases/phase-4-test-and-breakfix.md`
+- `projects/05-monitoring-integration/phases/phase-1-audit-logging.md`
+- `projects/05-monitoring-integration/phases/phase-2-syslog-config.md`
+- `projects/05-monitoring-integration/phases/phase-3-suricata-netflow.md`
+- `projects/05-monitoring-integration/phases/phase-4-dashboards-and-breakfix.md`
+- `projects/05-monitoring-integration/phases/phase-5-document-and-close.md`
+- `CLAUDE-REVIEW.md`
+- `CODEX-LOG.md`
+
+### Decisions made
+- Treat WireGuard as built into modern OPNsense; do not instruct `os-wireguard` installation unless the installed version lacks WireGuard and Claude approves.
+- Use `VPN → WireGuard → Instances` terminology and explicitly attach peers back to the instance.
+- Use `/32` for the road-warrior client tunnel address in the client config template, matching the OPNsense peer Allowed IP.
+- Keep WireGuard interface assignment as recommended for clean rules, but leave IP configuration as `None` because the tunnel address belongs to the WireGuard instance.
+- Keep VPN break/fix rule-order testing on lab VLAN 250 rather than intentionally exposing production VLAN 10 or management VLAN 20.
+- Use OPNsense's built-in Suricata EVE syslog output for SIEM forwarding before any agent or custom tail/syslog-ng workaround.
+- Use built-in `Reporting → NetFlow`; do not use `os-softflowd`.
+- Use modern log paths with `latest.log` symlinks instead of legacy `clog /var/log/filter.log`.
+
+### Open questions for Claude
+- Confirm the live OPNsense release before Leonel starts Project 04 or 05, especially if the GUI differs from the documented 24.x/modern paths.
+
+---
+
+## Session — 2026-06-06
+### Project worked on
 - Repo-level OPNsense family structure setup
 
 ### What I did
