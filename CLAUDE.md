@@ -44,3 +44,10 @@ ownership, settled facts, hazards, and standards.
 - P05 monitoring feeds Wazuh (homelab-management owns the Wazuh workflows)
 - If Unbound is ever exposed to VLAN 20 with real records, revisit the
   Windows conditional-forwarder design (windows repo P03 Phase 5 trigger)
+
+## `/goal` Session Start
+
+Run `/goal next` before project work. The local wrapper loads the canonical
+skill; if unavailable, read the family root `docs/homelab-goals.yaml`. Return
+one queue-selected project, reconcile `CLAUDE-REVIEW.md`, and do not advance
+past an unresolved blocker. Suricata remains detect-only first.

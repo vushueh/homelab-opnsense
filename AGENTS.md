@@ -137,3 +137,12 @@ After every Codex session, append to `CODEX-LOG.md`:
 ### Open questions for Claude
 - list
 ```
+
+## Master Program Selection
+
+Before selecting or advancing work, invoke the local `/goal` wrapper or read
+`../docs/homelab-goals.yaml`. Resume the active primary item or take exactly
+the lowest-sequence ready item; never offer a project menu. Reconcile this
+repo's README/project state and `CLAUDE-REVIEW.md` lock first. A blocker must
+be repaired, safely rescoped, or closed Deferred with a precise trigger before
+advancing. Firewall/IDS live approval and detect-only-first rules remain.

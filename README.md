@@ -96,3 +96,11 @@ OPNsense is not isolated. It is the firewall and routing lab that connects sever
 The repo has been converted into a family-project layout. Projects 01 and 02 preserve the existing completed work. Projects 03 through 06 now have starter folders and phase guides so they can be completed one at a time.
 
 **Trigger phrase:** `opnsense project`
+
+## Master Program Placement
+
+The forced queue is owned by `../docs/homelab-goals.yaml`. OPNsense executes
+P03/S2 at Q027 after the S8 canary, P05/V3 at Q028, VLAN verification at Q068,
+P04/S4 at Q070, and isolated P06/X6 HA at Q078. Suricata stays detect-only
+until its rule, alert, tuning, and rollback evidence pass. `/goal next`, not
+the older trigger phrase alone, selects work.
