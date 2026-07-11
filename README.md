@@ -97,6 +97,16 @@ The repo has been converted into a family-project layout. Projects 01 and 02 pre
 
 **Trigger phrase:** `opnsense project`
 
+## Related Families
+
+| Family | Repo | Connection |
+|--------|------|------------|
+| Route10 Network Core | [homelab-route10-network-core](https://github.com/vushueh/homelab-route10-network-core) | Route10 static routes hand the OPNsense lab VLANs to 192.168.10.32 (route10 repo owns that table) |
+| Homelab Management | [homelab-management](https://github.com/vushueh/homelab-management) | Future P05 plans Suricata/syslog forwarding to the Wazuh environment owned there |
+| Windows Server Labs | [windows-server-business-admin-labs](https://github.com/vushueh/windows-server-business-admin-labs) | Future P09 plans NPS/RADIUS admin authentication; real Unbound exposure would trigger the Windows P03 conditional-forwarder review |
+| SNML VirtualBox | [Secure-Network-Management-Labs](https://github.com/vushueh/Secure-Network-Management-Labs) | Isolated sandbox counterpart for firewall and IDS/IPS concepts; this repo remains the live lab-firewall authority |
+| **Master Hub** | [homelab-management](https://github.com/vushueh/homelab-management) | Navigation hub — see [cross-repo map](https://github.com/vushueh/homelab-management/blob/main/docs/CROSS-REPO-MAP.md) |
+
 ## Master Program Placement
 
 The forced queue is owned by `../docs/homelab-goals.yaml`. OPNsense executes
