@@ -45,17 +45,26 @@ Alta Labs Route10
 
 ## Family Project Map
 
-| # | Project | Status | Purpose |
-|---|---------|--------|---------|
-| 01 | [Baseline Router Deployment](projects/01-baseline-deployment/) | Complete | Preserve the bridge-mode failure analysis and final router-mode success |
-| 02 | [VLAN Segmentation](projects/02-vlan-segmentation/) | Complete | Document VLANs, DHCP, routing, firewall rules, and lab segmentation |
-| 03 | [IDS/IPS with Suricata](projects/03-ids-ips-suricata/) | Planned | Turn OPNsense into a detection and prevention sensor for lab traffic |
-| 04 | [VPN Remote Access](projects/04-vpn-remote-access/) | Planned | Build controlled remote access into lab networks |
-| 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Planned | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
-| 06 | [High Availability Design](projects/06-high-availability/) | Future | Design CARP/pfsync HA requirements and failover testing |
-| 07 | [DNS and DHCP Services](projects/07-dns-dhcp-services/) | Future | Harden DNS/DHCP design and document resolver behavior |
-| 08 | [Policy Automation](projects/08-policy-automation/) | Future | Explore API/export workflows, backups, and repeatable change control |
-| 09 | [Cross-Family Firewall Capstone](projects/09-cross-family-firewall-capstone/) | Future | Connect CML, Physical CCNA, Windows AD, SOC, and OPNsense policies |
+The project number organizes the OPNsense portfolio. The master `Q` number
+controls when each project or follow-on proof may run across all families.
+
+| # | Project | Master queue | Status | Purpose |
+|---|---------|---|--------|---------|
+| 01 | [Baseline Router Deployment](projects/01-baseline-deployment/) | Completed before forced queue | ✅ Complete | Preserve the bridge-mode failure analysis and final router-mode success |
+| 02 | [VLAN Segmentation](projects/02-vlan-segmentation/) | Q068 follow-on verification | ✅ Core project complete | Document VLANs, DHCP, routing, firewall rules, and lab segmentation |
+| 03 | [IDS/IPS with Suricata](projects/03-ids-ips-suricata/) | Q027 | ⬜ Planned | Turn OPNsense into a detection and prevention sensor for lab traffic |
+| 04 | [VPN Remote Access](projects/04-vpn-remote-access/) | Q070 | ⬜ Planned | Build controlled remote access into lab networks |
+| 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Q028 | ⬜ Planned | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
+| 06 | [High Availability Design](projects/06-high-availability/) | Q078 | ⬜ Planned | Design CARP/pfsync HA requirements and failover testing |
+| 07 | [DNS and DHCP Services](projects/07-dns-dhcp-services/) | Not yet queued | Future | Harden DNS/DHCP design and document resolver behavior |
+| 08 | [Policy Automation](projects/08-policy-automation/) | Not yet queued | Future | Explore API/export workflows, backups, and repeatable change control |
+| 09 | [Cross-Family Firewall Capstone](projects/09-cross-family-firewall-capstone/) | Not yet queued | Future | Connect CML, Physical CCNA, Windows AD, SOC, and OPNsense policies |
+
+### Special Master-Queue Proof
+
+| Queue | Clickable project | Status |
+|---|---|---|
+| Q068 | [VLAN isolation verification](projects/02-vlan-segmentation/) | ⬜ Planned; dedicated evidence page is created when selected |
 
 ## Standard Project Structure
 
