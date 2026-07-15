@@ -1,261 +1,207 @@
-# OPNsense Lab Network Documentation - README
+# P02 — OPNsense VLAN Segmentation
 
-## 📚 Overview
+- **Status:** ✅ Complete — 2025-10-26
+- **Project ID:** `OPNsense-P02`
+- **Platform:** OPNsense, Hyper-V, Cisco IOS, Proxmox VE, and Route10
+- **Scope:** OPNsense-owned lab VLANs across two hypervisors
+- **Parent baseline:** [P01 — OPNsense Baseline Router Deployment](../01-baseline-deployment/)
 
-This repository contains professional technical documentation for a complete OPNsense-based network inspection lab spanning multiple hypervisors (Hyper-V and Proxmox VE). The documentation was created by systematically analyzing and consolidating information from multiple troubleshooting sessions and configuration activities conducted between October 2-26, 2025.
+## Why This Matters
 
-## 📂 Repository Structure
+A security lab needs separate networks for trusted services, test clients, and
+intentionally vulnerable systems. I built P02 so those workloads could share
+physical switching without sharing one unrestricted broadcast domain.
 
-```
-homelab-docs/
-├── README.md (this file)
-├── OPNsense-Lab-Network-Documentation.md (main documentation)
-└── configs/ (optional - for configuration backups)
-```
+The project also demonstrates that segmentation is an end-to-end property. An
+OPNsense VLAN is not useful until the Hyper-V trunk, Cisco ports, Proxmox bridge,
+Route10 return routes, DHCP, firewall policy, and NAT all agree.
 
-## 🎯 What's Included
+## Portfolio Summary
 
-The main documentation (`OPNsense-Lab-Network-Documentation.md`) contains:
+**Situation:** P01 provided a stable router-mode firewall, but the lab workloads
+still needed controlled VLANs across Hyper-V and Proxmox.
 
-### ✅ **Complete Network Architecture**
-- High-level topology diagrams
-- Physical to virtual interface mappings
-- VLAN design and implementation
-- Traffic flow analysis for various scenarios
+**Task:** Build OPNsense-owned VLAN gateways, carry their tags across the virtual
+and physical infrastructure, route approved traffic, isolate the attack lab,
+and retain enough evidence to reproduce the design.
 
-### ✅ **8 Major Challenges Documented**
-Each challenge includes:
-- Problem statement and symptoms
-- Root cause analysis
-- Step-by-step solution
-- Verification commands
-- Lessons learned
+**Action:** I created VLAN interfaces through the OPNsense GUI, configured
+trunks on Hyper-V, Cisco, and Proxmox, added DHCP and firewall policy, installed
+the required Route10 static routes, corrected NAT and gateway conflicts, and
+verified the result with interface, route, lease, and screenshot evidence.
 
-Key challenges covered:
-1. VLAN interface creation (CLI vs GUI)
-2. Static route configuration on Route10
-3. Firewall rules blocking inter-VLAN traffic
-4. DHCP server configuration for multiple VLANs
-5. Proxmox VM network connectivity
-6. Hyper-V VM network isolation
-7. Managing OPNsense via different interfaces
-8. VLAN 250 gateway conflict resolution
+**Result:** PASS for the documented 2025 scope. VLANs 30, 40, 70, and 250 were
+routed by OPNsense across both hypervisors; VLAN 250 remained the isolated attack
+lab; and Route10 retained ownership of the production networks.
 
-### ✅ **Complete Configuration Details**
-- OPNsense interface setup (WAN, LAN, Management, VLANs)
-- Cisco 2960G switch configuration (trunk ports, VLANs)
-- Route10 static routing
-- Hyper-V virtual switch configuration
-- Proxmox VLAN-aware bridge setup
-- Firewall rules for all interfaces
-- DHCP server configurations
-- NAT setup
+## How To Read This Project
 
-### ✅ **Troubleshooting Guide**
-Common issues with:
-- Diagnosis steps
-- Root cause analysis
-- Solutions
-- Verification commands
+| Reader | Start here |
+|---|---|
+| Hiring manager or non-technical reader | [Portfolio Summary](#portfolio-summary), [What I Proved](#what-i-proved), and [Phase 6](#phase-6--verification-and-evidence) |
+| Technical reviewer | [Complete implementation guide](OPNsense-Lab-Network-Documentation.md), [quick reference](Quick-Reference-Guide.md), and [screenshot folders](images/) |
+| Future operator | [Reproduce Or Re-Verify](#reproduce-or-re-verify), then the ordered configuration and troubleshooting sections in the [implementation guide](OPNsense-Lab-Network-Documentation.md) |
 
-### ✅ **Traffic Flow Analysis**
-Detailed packet flows for:
-- Internet access from VLAN 250 VM
-- Attack from VLAN 20 to VLAN 250
-- VM communication across hypervisors
-- Management access to OPNsense
+## My Test Boundary
 
-### ✅ **Verification & Testing**
-Complete test procedures for:
-- DHCP functionality
-- Gateway reachability
-- Inter-VLAN routing
-- Internet connectivity
-- Cross-hypervisor communication
-- Firewall rule enforcement
-- IDS/IPS detection
-- Performance testing
+| Item | Boundary |
+|---|---|
+| OPNsense-owned 2025 lab VLANs | 30, 40, 70, and 250 |
+| Attack lab | VLAN 250; intentionally isolated |
+| Hypervisors | Hyper-V and Proxmox VE |
+| Physical transport | Cisco 2960G 802.1Q trunks |
+| Upstream routing | Route10 static routes via OPNsense WAN `192.168.10.32` |
+| Protected networks | Route10-owned production VLANs 10 and 20 |
 
-## 🔍 How to Use This Documentation
+This completion record reflects the documented 2025 build. The repository's
+current architecture and ownership files are authoritative if an address,
+release, or later-added VLAN has changed since that evidence was captured.
 
-### For Initial Setup
-1. **Start with "Network Architecture"** section to understand the topology
-2. **Review "VLAN Design"** to understand the IP addressing scheme
-3. **Follow "Step-by-Step Configuration"** in order:
-   - Phase 1: OPNsense setup
-   - Phase 2: VLAN configuration
-   - Phase 3: Cisco switch configuration
-   - Phase 4: Route10 configuration
+## Phase Status
 
-### For Troubleshooting
-1. **Check "Troubleshooting Guide"** for common issues
-2. **Review "Challenges & Solutions"** for similar problems encountered
-3. **Use "Verification & Testing"** to confirm fixes
-4. **Reference "Appendix C"** for useful commands
+| Phase | Work | Status |
+|---:|---|---|
+| 1 | Map the multi-hypervisor topology and VLAN ownership | Complete |
+| 2 | Create OPNsense VLAN interfaces and gateways | Complete |
+| 3 | Configure Hyper-V, Cisco, and Proxmox trunks | Complete |
+| 4 | Add DHCP, firewall policy, and outbound NAT | Complete |
+| 5 | Add Route10 return routes and resolve gateway conflicts | Complete |
+| 6 | Verify leases, routes, traffic paths, and screenshots | Complete |
 
-### For Understanding Traffic Flow
-1. **Read "Traffic Flow Analysis"** section
-2. **Follow packet paths** through the network
-3. **Understand NAT and routing** decisions at each hop
+## Phase 1 — Topology And Ownership
 
-### For Security Configuration
-1. **Review "Firewall Rules & Security"** section
-2. **Understand rule order and logic**
-3. **Follow security best practices** outlined
+I mapped every physical NIC, Hyper-V switch, Cisco trunk, Proxmox bridge, and
+OPNsense interface before changing the VLAN layer. I kept Route10 responsible
+for production VLANs 10 and 20 and assigned the lab networks to OPNsense. The
+[implementation guide](OPNsense-Lab-Network-Documentation.md#network-architecture)
+records the physical-to-virtual mapping and the [quick reference](Quick-Reference-Guide.md)
+condenses the final paths. That ownership map prevented duplicate gateways when
+the VLAN interfaces were created.
 
-## 📊 Quick Reference Tables
+## Phase 2 — OPNsense VLAN Interfaces
 
-The documentation includes multiple quick reference tables:
+I first created VLANs from the FreeBSD CLI, but those interfaces did not exist
+in OPNsense's configuration database and therefore could not be managed safely
+through the GUI. I removed the temporary interfaces and recreated each VLAN
+through **Interfaces → Other Types → VLAN**, assigned it, enabled it, and added
+the correct gateway address. This made the VLANs persistent and available to
+DHCP, firewall, NAT, backup, and screenshot workflows.
 
-- **IP Address Assignments** (Appendix D.1)
-- **Port Mappings** (Appendix D.2)
-- **VLAN Scheme** (VLAN Design section)
-- **Firewall Rules Summary** (Firewall Rules section)
-- **DHCP Configuration** (DHCP Configuration section)
-- **Challenge Summary** (Each challenge section)
+## Phase 3 — End-To-End Trunking
 
-## 🔧 Technologies Covered
+I configured the Hyper-V lab adapter as a trunk, allowed the matching tags on
+the Cisco ports toward Hyper-V and Proxmox, and used a VLAN-aware Proxmox bridge.
+Several early failures were transport problems rather than firewall problems:
+wrong allowed lists, access-versus-trunk mismatches, and VM tags at the wrong
+layer. The retained [Cisco screenshots](images/cisco/), [Hyper-V screenshots](images/hyperv/),
+and configuration sections in the guide show the final agreement across all
+three layers.
 
-| Category | Technologies |
-|----------|-------------|
-| **Firewall/Router** | OPNsense 24.7 (FreeBSD-based) |
-| **Hypervisors** | Windows Server 2022 Hyper-V, Proxmox VE 8.x |
-| **Networking** | Cisco IOS 15.x (Catalyst 2960G), Alta Labs Route10 |
-| **Protocols** | VLAN tagging (802.1Q), Static routing, NAT, DHCP |
-| **Security** | Firewall rules, Network segmentation, IDS/IPS ready |
+## Phase 4 — DHCP, Firewall Policy, And NAT
 
-## 📈 Project Metrics
+I enabled a separate DHCP scope on each lab VLAN, added rules on the interface
+where traffic entered OPNsense, and extended outbound NAT for the lab networks.
+Rule order initially blocked inter-VLAN traffic, so I moved the specific allow
+rules above broader denies and retained the attack-lab restrictions. The
+[OPNsense screenshots](images/opnsense/) preserve interface assignments, rules,
+leases, NAT, and routing evidence without publishing a raw configuration export.
 
-- **Duration**: ~3 weeks (October 2-26, 2025)
-- **VLANs Configured**: 5 (VLAN 10, 20, 30, 40, 70, 250)
-- **Hypervisors Integrated**: 2 (Hyper-V, Proxmox VE)
-- **Network Switches**: 2 (Route10, Cisco 2960G)
-- **Major Challenges Resolved**: 8
-- **Success Rate**: 100% operational
+## Phase 5 — Return Routes And Gateway Conflicts
 
-## 🎓 Learning Outcomes
+Traffic from production networks could reach OPNsense but could not return to
+an OPNsense-owned lab network until Route10 knew the next hop. I added the
+required static routes through `192.168.10.32` and verified them in the
+[Route10 evidence](images/route10/). I also resolved a VLAN 250 gateway conflict
+by keeping a single gateway authority. These changes completed the round trip
+without moving production routing away from Route10.
 
-By following this documentation, you will understand:
+## Phase 6 — Verification And Evidence
 
-1. **VLAN Implementation**
-   - Creating VLANs on OPNsense (proper GUI method)
-   - Trunk port configuration on Cisco switches
-   - VLAN tagging in Hyper-V and Proxmox
+I tested DHCP leases, gateway reachability, inter-VLAN paths, internet access,
+cross-hypervisor communication, firewall behavior, and route selection. The
+[implementation guide](OPNsense-Lab-Network-Documentation.md#verification--testing)
+records the ordered checks, and the screenshot folders tie the result to
+OPNsense, Route10, Cisco, and Hyper-V views. I then wrote the
+[quick-reference guide](Quick-Reference-Guide.md) so future troubleshooting can
+start from the final map instead of replaying the three-week discovery process.
 
-2. **Inter-VLAN Routing**
-   - Configuring OPNsense as inter-VLAN router
-   - Static route configuration
-   - Understanding traffic flow between VLANs
+## What I Proved
 
-3. **Firewall Configuration**
-   - Creating proper firewall rules
-   - Understanding rule order and logic
-   - NAT configuration for multiple VLANs
+- OPNsense can own multiple isolated lab VLANs without taking over production routing.
+- VLAN tags can cross Hyper-V, a Cisco trunk, and a Proxmox VLAN-aware bridge.
+- GUI-created OPNsense VLANs persist and integrate with DHCP, firewall, NAT, and backup.
+- Route10 return routes are required for production-to-lab round trips.
+- Firewall rules must be placed on the ingress interface and evaluated in order.
+- VLAN 250 can remain a distinct attack-lab boundary.
+- The saved screenshots and guides support both review and reproduction.
 
-4. **Multi-Hypervisor Integration**
-   - Bridging networks across Hyper-V and Proxmox
-   - VLAN trunk configuration on both platforms
-   - VM networking best practices
+## Technical Evidence
 
-5. **Troubleshooting Skills**
-   - Systematic problem diagnosis
-   - Using CLI tools (tcpdump, ifconfig, etc.)
-   - Reading logs and interpreting errors
+- [Original project navigation record](technical-details.md)
+- [Complete implementation and troubleshooting guide](OPNsense-Lab-Network-Documentation.md)
+- [Quick-reference guide](Quick-Reference-Guide.md)
+- [OPNsense screenshots](images/opnsense/)
+- [Route10 screenshots](images/route10/)
+- [Cisco screenshots](images/cisco/)
+- [Hyper-V screenshots](images/hyperv/)
+- [Current repository architecture](../../README.md#current-architecture)
 
-## ⚠️ Important Notes
+## How We Worked Together
 
-### Security Considerations
-- This is a **lab environment** configuration
-- Some settings prioritize ease of use over security
-- **Review and harden** before production use
-- Management interface has NO internet access (by design)
-- Attack lab (VLAN 250) is isolated for security testing
+### My Input And How I Helped
 
-### Prerequisites
-To implement this configuration, you need:
-- Basic networking knowledge (IP addressing, routing, VLANs)
-- Access to hypervisor host (Hyper-V or Proxmox)
-- Managed switch with VLAN support
-- OPNsense installation media
-- Familiarity with CLI (PowerShell, Bash, Cisco IOS)
+I performed the original OPNsense, Hyper-V, Cisco, Proxmox, and Route10 work,
+tested the traffic paths, captured the screenshots, and consolidated the eight
+major troubleshooting cases. My original commits and evidence predate the
+current shared-agent workflow.
 
-### Hardware Requirements (Minimum)
-- **Hypervisor Host**: 16GB RAM, 4+ CPU cores, 100GB storage
-- **Managed Switch**: VLAN-capable (802.1Q tagging)
-- **Network Cards**: Multiple NICs for interface separation
+### What Codex Did And How
 
-## 🚀 Next Steps
+Codex did not claim the original 2025 implementation. During this migration,
+Codex preserved the existing README as `technical-details.md`, kept the complete
+implementation guide intact, reconciled current ownership notes, and wrote this
+short phase-based entry page.
 
-After reviewing this documentation:
+### What Claude Did And How
 
-1. **Export Your Configurations**
-   - OPNsense: System → Configuration → Backups
-   - Cisco: `show running-config`
-   - Hyper-V: PowerShell export scripts (see Appendix A.4)
-   - Proxmox: `/etc/network/interfaces`
+The retained 2025 project record does not document a Claude role in the original
+build, so I do not assign one. For the 2026 migration, Claude was asked to review
+the new summary independently for factual overstatement, link integrity, and
+clear separation between historical evidence and current architecture.
 
-2. **Implement IDS/IPS**
-   - Follow "Future Enhancements" section
-   - Enable Suricata on OPNsense
-   - Configure rule sets
+### How We Communicated And Completed The Project
 
-3. **Set Up Monitoring**
-   - Deploy logging solution (ELK, Graylog)
-   - Configure alerting
-   - Create dashboards
+I completed and documented the original troubleshooting sessions. Later, I set
+the portfolio documentation standard, Codex reorganized the entry page without
+discarding detail, and Claude independently reviewed the migration. Readers can
+move from this short story to the implementation guide when they need exact
+commands or screenshots.
 
-4. **Add Automation**
-   - Backup configs to GitHub automatically
-   - Script common tasks
-   - Implement Infrastructure as Code
+### Pushback And How We Resolved It
 
-## 📝 Contributing
+The network repeatedly challenged assumptions at different layers. CLI-created
+VLANs were not manageable in the GUI, Route10 lacked return routes, firewall
+rule order blocked traffic, hypervisor trunks disagreed on tags, and VLAN 250
+had competing gateway assumptions. I resolved each problem at its owning layer,
+verified the correction, and documented both the symptom and root cause instead
+of hiding the failed attempt.
 
-If you're using this documentation and find:
-- **Errors or omissions**: Please document them
-- **Alternative solutions**: Share your approach
-- **Additional challenges**: Document your findings
+## Reproduce Or Re-Verify
 
-Consider creating your own branch or fork to track your specific modifications.
+1. Read the current repository ownership rules and compare them with the
+   historical [quick reference](Quick-Reference-Guide.md).
+2. Back up OPNsense and record Route10, Cisco, Hyper-V, and Proxmox state before
+   changing a trunk or route.
+3. Create VLANs through the OPNsense GUI, then assign, enable, and address each
+   one before adding services.
+4. Configure the same allowed tag list from the OPNsense VM adapter through the
+   Cisco ports and Proxmox bridge.
+5. Add DHCP, ingress firewall policy, NAT, and only the required Route10 return
+   routes, then run the verification sequence in the
+   [implementation guide](OPNsense-Lab-Network-Documentation.md#verification--testing).
 
-## 📧 Support
+## What Happens Next
 
-For questions or clarifications about this documentation:
-1. Review the "Troubleshooting Guide" section first
-2. Check "Challenges & Solutions" for similar issues
-3. Verify configurations match your environment
-4. Use the command reference in Appendix C for diagnostics
-
-## 🏆 Credits
-
-This documentation was compiled from:
-- Multiple troubleshooting sessions (October 2-26, 2025)
-- Real-world problem-solving experiences
-- Best practices from OPNsense, Cisco, and virtualization communities
-- Lessons learned from trial and error
-
-## 📄 License
-
-This documentation is provided as-is for educational and reference purposes.
-Modify and adapt as needed for your specific environment.
-
----
-
-**Document Version**: 1.0  
-**Last Updated**: October 26, 2025  
-**Status**: Complete and Verified  
-**Verified On**: OPNsense 24.7, Windows Server 2022 Hyper-V, Proxmox VE 8.x
-
----
-
-## 🔗 Quick Links Within Documentation
-
-- [Executive Summary](#executive-summary)
-- [Network Architecture](#network-architecture)
-- [Challenges & Solutions](#challenges--solutions)
-- [Step-by-Step Configuration](#step-by-step-configuration)
-- [Troubleshooting Guide](#troubleshooting-guide)
-- [Verification & Testing](#verification--testing)
-- [Quick Reference Tables](#appendix)
-
-**Ready to get started? Open `OPNsense-Lab-Network-Documentation.md` and begin with the Executive Summary!**
+P02 is closed. [P03](../03-ids-ips-suricata/) is the next OPNsense project and
+owns the staged Suricata IDS/IPS work. This VLAN result does not authorize P03,
+production-route changes, or blocking-mode deployment.
