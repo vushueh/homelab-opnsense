@@ -15,13 +15,17 @@ This is not only a setup archive. It should become a skill-building firewall adm
 | Hyper-V host | WIN-PRQD8TJG04M / 192.168.20.11 |
 | OPNsense role | Lab and inspection firewall |
 | OPNsense mode | Router mode, not bridge mode |
-| OPNsense management | 192.168.20.254 |
+| OPNsense management | Named unknown as of 2026-07-18; retained evidence favors `192.168.20.253`, while legacy pages say `.254` |
 | OPNsense WAN | DHCP from Route10 / 192.168.10.x |
 | VLAN 30 | 192.168.30.0/24, gateway 192.168.30.1 |
 | VLAN 40 | 192.168.40.0/24, gateway 192.168.40.1 |
 | VLAN 50 | 192.168.50.0/24, gateway 192.168.50.1 |
 | VLAN 250 | 192.168.250.0/24, gateway 192.168.250.1 |
 | Production router | Alta Labs Route10, production path stays separate |
+
+The dated [U0-TRUTH management-address reconciliation](docs/u0-truth-management-address-2026-07-18.md)
+is the current authority boundary. Do not rely on `.253` or `.254` as freshly
+verified until Leonel completes the named manual console readback.
 
 ## Edit Tier Rules
 

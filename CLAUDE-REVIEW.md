@@ -6,6 +6,26 @@
 
 ## Active Items
 
+### 2026-07-18 ITEM-U0-01 — Verify the current VLAN 20 management address
+Status: OPEN
+Priority: medium
+For: Leonel
+
+U0-TRUTH found conflicting `.253` and `.254` owner statements. Retained Route10
+P02 evidence favors `.253` for OPNsense and identifies `.254` as a Cisco R1
+path, but the bounded Windows/Hyper-V read-only check returned no evidence
+before its stop timeout. A separately approved preflight confirmed SSH/22 and
+HTTPS/443 open on OPNsense at `192.168.10.32`, but the one BatchMode `root`
+query stopped at authentication without using a password.
+
+Leonel action: In a later approved read-only window, open the existing OPNsense
+Hyper-V console, run `ifconfig hn0`, and capture only the private IPv4/prefix
+line. Do not change the interface and do not expose credentials, public WAN
+details, keys, certificates, or a raw configuration export.
+
+Resolution trigger: Fresh console evidence identifies the current VLAN 20
+interface/address. Until then, current owner docs must say named unknown.
+
 ## SKILL REVIEW REQUEST — 2026-06-06 (Claude → Codex)
 
 ### 🟢 RESOLVED — Item S02: Review opnsense-evidence-documentation skill
