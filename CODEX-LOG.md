@@ -6,6 +6,33 @@
 
 ## Sessions
 
+## Session — 2026-07-18
+### Project worked on
+- U0-TRUTH OPNsense management-address reconciliation
+
+### What I did
+- Reconciled current owner assertions with retained Route10 P02 evidence.
+- Bounded Claude to Windows/Hyper-V read-only corroboration because this repo forbids Codex live execution.
+- Stopped the peer lane after it returned no evidence within the timeout; no fallback live scope was added.
+- After Leonel explicitly approved the documented `192.168.10.32` fallback, confirmed SSH/22 and HTTPS/443 open; the one key-only `root` interface query stopped at authentication without a password prompt.
+- Replaced the unsupported current `.254` assertion with a named unknown and added the exact manual console resolution trigger.
+
+### Files created/modified
+- `docs/u0-truth-management-address-2026-07-18.md`
+- `AGENTS.md`
+- `CLAUDE.md`
+- `README.md`
+- `CLAUDE-REVIEW.md`
+- `CODEX-LOG.md`
+
+### Decisions made
+- Retained evidence favors `.253` for OPNsense and identifies `.254` as a Cisco R1 path, but U0 does not call either freshly verified.
+- Historical project pages remain historical and are not silently rewritten.
+- No screenshot is required unless Leonel chooses to capture the later `ifconfig hn0` console proof.
+
+### Open questions for Claude
+- None. The remaining manual console trigger is assigned to Leonel in `CLAUDE-REVIEW.md`.
+
 ## Session — 2026-06-06
 ### Project worked on
 - OPNsense evidence-documentation skill review

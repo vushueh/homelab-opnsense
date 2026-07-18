@@ -6,8 +6,10 @@ Shared rules: [../AGENTS.md](../AGENTS.md) ·
 
 ## What this repo owns (source of truth for)
 
-- OPNsense 25.7 Hyper-V VM: Route10-facing 192.168.10.32 (hn2), VLAN-20 leg
-  192.168.20.253 (hn0), default route via 192.168.10.1
+- OPNsense 25.7 Hyper-V VM: Route10-facing 192.168.10.32 (hn2), default route
+  via 192.168.10.1; the VLAN-20 leg is a named unknown as of 2026-07-18.
+  Retained evidence favors 192.168.20.253 on hn0 and identifies .254 as a Cisco
+  path, but a fresh manual console readback is still required.
 - OPNsense-owned lab VLANs and DHCP scopes: 30/40/70/100/200/250 as
   192.168.x.0/24 (distinct from Route10's own VLAN 30 = 10.30.0.0/24!)
 - Unbound behavior: system domain `internal` (interface self-registration

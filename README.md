@@ -21,6 +21,7 @@ OPNsense is used as the inspection and lab firewall. It does not replace the pro
 - [Project Index](projects/README.md)
 - [Family Skill](skills/opnsense-family.md)
 - [Cross-Family Integration](docs/cross-family-integration.md)
+- [U0-TRUTH Management-Address Reconciliation](docs/u0-truth-management-address-2026-07-18.md)
 - [Troubleshooting](troubleshooting/)
 
 ## Current Architecture
@@ -34,7 +35,7 @@ Alta Labs Route10
     |-- OPNsense WAN: 192.168.10.x
             |
         OPNsense VM on Hyper-V
-            |-- MGMT: 192.168.20.254
+            |-- MGMT: named unknown; retained .253, legacy .254
             |-- VLAN 30: 192.168.30.1/24   Blue team / services
             |-- VLAN 40: 192.168.40.1/24   Kali / attacker tools
             |-- VLAN 50: 192.168.50.1/24   Reserved lab segment
@@ -42,6 +43,12 @@ Alta Labs Route10
             |
         Cisco Catalyst 2960G / Hyper-V vSwitch / lab VMs
 ```
+
+The management address is intentionally unresolved in current documentation.
+The [2026-07-18 U0-TRUTH record](docs/u0-truth-management-address-2026-07-18.md)
+explains why retained evidence favors `.253`, why `.254` may be a Cisco R1
+path, and which manual console readback will settle the fact. Historical project
+pages remain unchanged as historical evidence.
 
 ## Family Project Map
 
