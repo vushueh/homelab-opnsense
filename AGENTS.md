@@ -11,6 +11,11 @@ checks; preserve the active item, dependencies, queue order and WIP limits.
 Either operating agent may publish the authorized package. Use explicit paths
 and relevant checks, preserve dirty work and intentionally unpublished overlays.
 
+For startup scope and publication roles, this Shared workflow section takes
+precedence over older README ownership tables and phase-guide handoffs to Claude.
+Those guides still own technical procedures, evidence and live safety requirements.
+An unrelated OPEN item does not block a named-file task; honor related blockers.
+
 # AGENTS.md — OPNsense Firewall Labs
 
 Read this file before doing any work in this repo.

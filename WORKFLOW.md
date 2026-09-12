@@ -11,10 +11,12 @@ Say **`opnsense project`** to work in this repo.
 When triggered, the active assistant should:
 
 1. Read `AGENTS.md`.
-2. Read `CLAUDE-REVIEW.md` for open items.
-3. Read `CODEX-LOG.md` for the latest work.
-4. Read `README.md` and the relevant project README.
-5. Report the current status and the next safe step.
+2. Before reporting status or resuming/selecting work, use the canonical family
+   `goal` skill and its checkout/default-branch freshness, dependency and WIP checks.
+3. Search related OPEN items and the latest related log entry.
+4. Read the selected owner project README and dated closeout.
+5. Report the verified active item and next safe step; do not choose from stale
+   local status alone. A named-file task follows AGENTS task routing instead.
 
 ## Trigger Phrases
 
