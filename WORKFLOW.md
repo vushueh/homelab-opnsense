@@ -1,3 +1,7 @@
+> Shared AGENTS and its Git/GitHub rule supersede legacy agent-only push
+> roles and automatic commit examples below. Publish the authorized scope with
+> either operating agent; live execution restrictions remain unchanged.
+
 # WORKFLOW.md — OPNsense Family Workflow
 
 ## Trigger Phrase
@@ -7,10 +11,12 @@ Say **`opnsense project`** to work in this repo.
 When triggered, the active assistant should:
 
 1. Read `AGENTS.md`.
-2. Read `CLAUDE-REVIEW.md` for open items.
-3. Read `CODEX-LOG.md` for the latest work.
-4. Read `README.md` and the relevant project README.
-5. Report the current status and the next safe step.
+2. Before reporting status or resuming/selecting work, use the canonical family
+   `goal` skill and its checkout/default-branch freshness, dependency and WIP checks.
+3. Search related OPEN items and the latest related log entry.
+4. Read the selected owner project README and dated closeout.
+5. Report the verified active item and next safe step; do not choose from stale
+   local status alone. A named-file task follows AGENTS task routing instead.
 
 ## Trigger Phrases
 
@@ -60,7 +66,7 @@ projects/project-name/
 | Live OPNsense SSH/API execution | Claude, after approval |
 | Command drafting and troubleshooting plans | Codex |
 | Sanitized config snippets and scripts | Codex |
-| Final review and GitHub push | Claude when active; Codex may patch when Leonel explicitly asks |
+| Final review and GitHub push | Either operating agent for the user-authorized package |
 | `CLAUDE-REVIEW.md` | Claude opens items, Codex resolves or comments |
 | `CODEX-LOG.md` | Codex logs its work |
 

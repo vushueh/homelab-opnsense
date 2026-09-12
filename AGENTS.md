@@ -1,3 +1,21 @@
+## Shared workflow
+
+Read `E:/Homelab-Repos/family-projects/AGENTS.md` once per session
+(`/mnt/e/Homelab-Repos/family-projects/AGENTS.md` in WSL). If working outside
+this workspace, fetch the shared contract from
+`vushueh/family-projects-ai-playbook` before homelab operations.
+It owns task-scoped reads and publication authority; this repo owns technical
+constraints. For a named file task, read target files and related OPEN items.
+For project selection/status/resume, use the shared goal skill and freshness
+checks; preserve the active item, dependencies, queue order and WIP limits.
+Either operating agent may publish the authorized package. Use explicit paths
+and relevant checks, preserve dirty work and intentionally unpublished overlays.
+
+For startup scope and publication roles, this Shared workflow section takes
+precedence over older README ownership tables and phase-guide handoffs to Claude.
+Those guides still own technical procedures, evidence and live safety requirements.
+An unrelated OPEN item does not block a named-file task; honor related blockers.
+
 # AGENTS.md — OPNsense Firewall Labs
 
 Read this file before doing any work in this repo.
@@ -37,12 +55,12 @@ Local path (Windows): `E:\Homelab-Repos\family-projects\homelab-opnsense\`
 Local path (WSL):      `/mnt/e/Homelab-Repos/family-projects/homelab-opnsense/`
 - Codex writes here directly (open this folder as the Codex workspace/project).
 - Claude reads and edits files here directly.
-- Session start: `git pull` — session end: `git add -A && git commit && git push`.
+- Start with scoped Git status; commit explicit reviewed paths and publish only when authorized.
 
 ### Tier 2 — GitHub API (exception only)
 Use for: bridge file quick patches (CLAUDE-REVIEW.md, CODEX-LOG.md) between sessions when no local checkout is open.
 Never: phase content, skill files, configs, or any file over ~5KB.
-Who pushes: Claude by default. Codex may push bridge files only when Leonel explicitly asks.
+Either agent may publish the user-authorized package using available Git/GitHub tools.
 
 ### Tier 3 — Live infrastructure (approval required)
 Use for: SSH commands, OPNsense web UI changes, firewall rule edits.
@@ -88,7 +106,7 @@ Claude should:
 - read `CODEX-LOG.md` and `CLAUDE-REVIEW.md` at session start;
 - review Codex-generated commands before Leonel runs them;
 - execute approved live SSH/API work when needed;
-- push final GitHub changes when Claude is active;
+- publish final GitHub changes within the user-authorized package;
 - maintain `CLAUDE-REVIEW.md` for open items.
 
 ## Leonel Primary Role
