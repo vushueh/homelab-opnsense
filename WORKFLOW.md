@@ -1,3 +1,7 @@
+> Shared AGENTS and its Git/GitHub rule supersede legacy agent-only push
+> roles and automatic commit examples below. Publish the authorized scope with
+> either operating agent; live execution restrictions remain unchanged.
+
 # WORKFLOW.md — OPNsense Family Workflow
 
 ## Trigger Phrase
@@ -60,7 +64,7 @@ projects/project-name/
 | Live OPNsense SSH/API execution | Claude, after approval |
 | Command drafting and troubleshooting plans | Codex |
 | Sanitized config snippets and scripts | Codex |
-| Final review and GitHub push | Claude when active; Codex may patch when Leonel explicitly asks |
+| Final review and GitHub push | Either operating agent for the user-authorized package |
 | `CLAUDE-REVIEW.md` | Claude opens items, Codex resolves or comments |
 | `CODEX-LOG.md` | Codex logs its work |
 
