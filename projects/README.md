@@ -11,14 +11,14 @@ a queue number remain future ideas and are not silently started.
 |---|---------|---|--------|------------|
 | 01 | [Baseline Router Deployment](01-baseline-deployment/) | Completed before forced queue | ✅ Complete | Deploy OPNsense on Hyper-V in router mode |
 | 02 | [VLAN Segmentation](02-vlan-segmentation/) | Q068 follow-on verification | ✅ Core project complete | Build routed lab VLANs with DHCP, NAT, and firewall rules |
-| 03 | [IDS/IPS with Suricata](03-ids-ips-suricata/) | Q027 | ⬜ Planned | Detect and block lab attacks using Suricata |
+| 03 | [IDS/IPS with Suricata](03-ids-ips-suricata/) | Q027 | ✅ Complete (detect-only; IPS deferred) | Detect controlled lab events and verify Wazuh delivery |
 | 04 | [VPN Remote Access](04-vpn-remote-access/) | Q070 | ⬜ Planned | Build controlled remote access to lab networks |
 | 05 | [Monitoring and SIEM Integration](05-monitoring-integration/) | Q028 | ⬜ Planned | Export logs/flows to Wazuh or other monitoring tools |
 | 06 | [High Availability Design](06-high-availability/) | Q078 | ⬜ Planned | Design and test HA requirements when hardware is available |
 
 ## Recommended Order
 
-1. Finish Project 03 first because it turns the firewall into a security sensor.
+1. Project 03 is complete in detect-only scope; IPS remains deferred.
 2. Then Project 05, because monitoring makes Suricata and firewall rule behavior visible.
 3. Then Project 04, because remote access should be built after logging and alerting exist.
 4. Keep Project 06 as design-only until a second firewall instance or host exists.

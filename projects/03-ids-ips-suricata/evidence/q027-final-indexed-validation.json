@@ -1,0 +1,48 @@
+{
+  "verified_date": "2026-09-20 America/Denver / 2026-09-21 UTC",
+  "method": "Authenticated Wazuh Threat Hunting DQL, manager.name leonel, last24h outer time range; exact embedded data.timestamp ranges",
+  "rule_id": "100086",
+  "signature_id": 2062640,
+  "windows": [
+    {
+      "name": "surrounding_positive_controls",
+      "from": "2026-09-21T02:27:10Z",
+      "to": "2026-09-21T02:27:32Z",
+      "hits": 16
+    },
+    {
+      "name": "negative",
+      "from": "2026-09-21T02:27:18Z",
+      "to": "2026-09-21T02:27:25Z",
+      "hits": 0
+    },
+    {
+      "name": "positive_after",
+      "from": "2026-09-21T02:27:25Z",
+      "to": "2026-09-21T02:27:32Z",
+      "hits": 8
+    },
+    {
+      "name": "final_cleanup_control",
+      "from": "2026-09-21T03:13:00Z",
+      "to": "2026-09-21T03:13:11Z",
+      "hits": 8
+    }
+  ],
+  "matched_final_event": {
+    "sid": 2062640,
+    "timestamp": "2026-09-20T20:13:03.672584-0700",
+    "flow_id": 1829310132774172,
+    "src": "192.168.40.158",
+    "dst": "192.168.250.172",
+    "iface": "vlan01",
+    "action": "allowed"
+  },
+  "index": "wazuh-alerts-4.x-2026.09.21",
+  "decoder": "q027-suricata-eve",
+  "limitations": [
+    "Clock skew remains; data.timestamp used rather than manager timestamp.",
+    "No claim of zero transport loss or complete Filebeat backlog clearance.",
+    "Temporary-rule break/fix acceptance is local; final existing control indexed."
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "phase": "tuning-clean-enabled",
+  "state": {
+    "rules": [
+      {
+        "enabled": "1",
+        "source": "192.168.40.158/32",
+        "destination": "192.168.250.172/32",
+        "description": "Q027 TEMP lab-pair alert validation",
+        "action": "alert",
+        "bypass": "0",
+        "fingerprint": ""
+      }
+    ],
+    "rendered": [
+      {
+        "file": "/usr/local/etc/suricata/opnsense.rules/OPNsense.rules",
+        "rule": "alert ip   192.168.40.158/32  any ->  192.168.250.172/32  any (msg:\"Q027 TEMP lab-pair alert validation\";  sid:4294967294; rev:1;)"
+      }
+    ],
+    "enabled": "1",
+    "interfaces": "opt2,opt7,opt3,opt4,wan",
+    "promisc": "1",
+    "pid": "58176"
+  },
+  "reload": "<173>1 2026-09-20T19:53:58-07:00 OPNsense.internal suricata 58176 - [meta sequenceId=\"32\"] [100834] <Notice> -- rule reload complete\n",
+  "windows": [
+    {
+      "name": "benign_marker",
+      "start": {
+        "time": "2026-09-21T02:55:15+00:00",
+        "inode": 2003598,
+        "offset": 81490,
+        "alerts": []
+      },
+      "end": {
+        "time": "2026-09-21T02:55:26+00:00",
+        "inode": 2003598,
+        "offset": 82853,
+        "alerts": [
+          {
+            "sid": 4294967294,
+            "timestamp": "2026-09-20T19:55:18.098239-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan01",
+            "action": "allowed"
+          }
+        ]
+      },
+      "delivery": "PATTERN: 0x7870636f6e66696720\nPING 192.168.250.172 (192.168.250.172) 48(76) bytes of data.\n56 bytes from 192.168.250.172: icmp_seq=1 ttl=63 time=2.62 ms\n56 bytes from 192.168.250.172: icmp_seq=2 ttl=63 time=1.47 ms\n\n--- 192.168.250.172 ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1002ms\nrtt min/avg/max/mdev = 1.471/2.046/2.622/0.575 ms\n",
+      "counts": {
+        "4294967294": 1,
+        "2062640": 0
+      },
+      "pass": true
+    },
+    {
+      "name": "independent_control",
+      "start": {
+        "time": "2026-09-21T02:55:26+00:00",
+        "inode": 2003598,
+        "offset": 82853
+      },
+      "end": {
+        "time": "2026-09-21T02:55:36+00:00",
+        "inode": 2003598,
+        "offset": 89430,
+        "alerts": [
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:28.716414-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:28.716935-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:28.716368-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:28.716952-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:29.716882-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:29.717548-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:29.716871-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T19:55:29.717564-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan03",
+            "action": "allowed"
+          }
+        ]
+      },
+      "delivery": "PATTERN: 0x6970636f6e66696720\nPING 192.168.250.172 (192.168.250.172) 48(76) bytes of data.\n56 bytes from 192.168.250.172: icmp_seq=1 ttl=63 time=1.13 ms\n56 bytes from 192.168.250.172: icmp_seq=2 ttl=63 time=1.30 ms\n\n--- 192.168.250.172 ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1001ms\nrtt min/avg/max/mdev = 1.127/1.211/1.295/0.084 ms\n",
+      "counts": {
+        "4294967294": 0,
+        "2062640": 8
+      },
+      "pass": false
+    }
+  ],
+  "evaluation_note": "Initial evaluator incorrectly required an IP-only alert on each marker window. Suricata checks IP-only rules once per flow direction. Baseline passes with a temporary alert in the first window and independent control alerts in the second. Original pass fields retained.",
+  "reviewed_pass": true
+}

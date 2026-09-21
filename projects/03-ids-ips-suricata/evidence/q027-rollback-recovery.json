@@ -1,0 +1,94 @@
+{
+  "phase": "rollback recovery after confirmed reload complete",
+  "start": {
+    "time": "2026-09-21T02:49:50+00:00",
+    "inode": 2003598,
+    "offset": 73001,
+    "alerts": []
+  },
+  "end": {
+    "time": "2026-09-21T02:50:01+00:00",
+    "inode": 2003598,
+    "offset": 79973,
+    "alerts": [
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:53.351764-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.40.158",
+        "dst": "192.168.250.172",
+        "iface": "vlan01",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:53.351727-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.40.158",
+        "dst": "192.168.250.172",
+        "iface": "vlan03",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:53.352446-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.250.172",
+        "dst": "192.168.40.158",
+        "iface": "vlan01",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:53.352458-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.250.172",
+        "dst": "192.168.40.158",
+        "iface": "vlan03",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:54.352641-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.40.158",
+        "dst": "192.168.250.172",
+        "iface": "vlan01",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:54.352625-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.40.158",
+        "dst": "192.168.250.172",
+        "iface": "vlan03",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:54.353482-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.250.172",
+        "dst": "192.168.40.158",
+        "iface": "vlan01",
+        "action": "allowed"
+      },
+      {
+        "sid": 2062640,
+        "timestamp": "2026-09-20T19:49:54.353501-0700",
+        "flow_id": 2003475351594268,
+        "src": "192.168.250.172",
+        "dst": "192.168.40.158",
+        "iface": "vlan03",
+        "action": "allowed"
+      }
+    ]
+  },
+  "delivery": "PATTERN: 0x6970636f6e66696720\nPING 192.168.250.172 (192.168.250.172) 48(76) bytes of data.\n56 bytes from 192.168.250.172: icmp_seq=1 ttl=63 time=1.12 ms\n56 bytes from 192.168.250.172: icmp_seq=2 ttl=63 time=1.37 ms\n\n--- 192.168.250.172 ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1001ms\nrtt min/avg/max/mdev = 1.123/1.247/1.371/0.124 ms\n",
+  "counts": {
+    "4294967294": 0,
+    "2062640": 8
+  },
+  "pass": true
+}

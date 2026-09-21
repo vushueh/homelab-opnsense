@@ -126,7 +126,7 @@ Leonel should:
 |---|---------|--------|
 | 01 | Baseline Router Deployment | Complete |
 | 02 | VLAN Segmentation | Complete |
-| 03 | IDS/IPS with Suricata | Planned |
+| 03 | IDS/IPS with Suricata | Complete (detect-only; IPS deferred) |
 | 04 | VPN Remote Access | Planned |
 | 05 | Monitoring and SIEM Integration | Planned |
 | 06 | High Availability Design | Future |

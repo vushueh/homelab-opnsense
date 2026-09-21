@@ -59,7 +59,7 @@ controls when each project or follow-on proof may run across all families.
 |---|---------|---|--------|---------|
 | 01 | [Baseline Router Deployment](projects/01-baseline-deployment/) | Completed before forced queue | ✅ Complete | Preserve the bridge-mode failure analysis and final router-mode success |
 | 02 | [VLAN Segmentation](projects/02-vlan-segmentation/) | Q068 follow-on verification | ✅ Core project complete | Document VLANs, DHCP, routing, firewall rules, and lab segmentation |
-| 03 | [IDS/IPS with Suricata](projects/03-ids-ips-suricata/) | Q027 | ⬜ Planned | Turn OPNsense into a detection and prevention sensor for lab traffic |
+| 03 | [IDS/IPS with Suricata](projects/03-ids-ips-suricata/) | Q027 | Complete 2026-09-20 | Verified detect-only controls, Wazuh correlation, scoped tuning/recovery and cleanup; IPS deferred |
 | 04 | [VPN Remote Access](projects/04-vpn-remote-access/) | Q070 | ⬜ Planned | Build controlled remote access into lab networks |
 | 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Q028 | ⬜ Planned | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
 | 06 | [High Availability Design](projects/06-high-availability/) | Q078 | ⬜ Planned | Design CARP/pfsync HA requirements and failover testing |
@@ -118,7 +118,7 @@ The repo has been converted into a family-project layout. Projects 01 and 02 pre
 | Family | Repo | Connection |
 |--------|------|------------|
 | Route10 Network Core | [homelab-route10-network-core](https://github.com/vushueh/homelab-route10-network-core) | Route10 static routes hand the OPNsense lab VLANs to 192.168.10.32 (route10 repo owns that table) |
-| Homelab Management | [homelab-management](https://github.com/vushueh/homelab-management) | Future P05 plans Suricata/syslog forwarding to the Wazuh environment owned there |
+| Homelab Management | [homelab-management](https://github.com/vushueh/homelab-management) | Q027 verified Suricata EVE forwarding and decoding in Wazuh; P05 expands observability |
 | Windows Server Labs | [windows-server-business-admin-labs](https://github.com/vushueh/windows-server-business-admin-labs) | Future P09 plans NPS/RADIUS admin authentication; real Unbound exposure would trigger the Windows P03 conditional-forwarder review |
 | SNML VirtualBox | [Secure-Network-Management-Labs](https://github.com/vushueh/Secure-Network-Management-Labs) | Isolated sandbox counterpart for firewall and IDS/IPS concepts; this repo remains the live lab-firewall authority |
 | **Master Hub** | [homelab-management](https://github.com/vushueh/homelab-management) | Navigation hub — see [cross-repo map](https://github.com/vushueh/homelab-management/blob/main/docs/CROSS-REPO-MAP.md) |
