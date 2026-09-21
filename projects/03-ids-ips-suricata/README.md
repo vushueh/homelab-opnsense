@@ -1,6 +1,6 @@
-# Q027 â€” OPNsense IDS with Suricata
+# Q027 — OPNsense IDS with Suricata
 
-Project: CUR-OPN-P03 Â· Owner: homelab-opnsense Â· Started: 2026-09-20 Â· Status: Complete. Scope: detect-only inspection and a bounded test between owned lab hosts. Completed 2026-09-20; final indexed controls and quiet window verified.
+Project: CUR-OPN-P03 · Owner: homelab-opnsense · Started: 2026-09-20 · Status: Complete. Scope: detect-only inspection and a bounded test between owned lab hosts. Completed 2026-09-20; final indexed controls and quiet window verified.
 
 ## Why This Matters
 
@@ -19,34 +19,34 @@ Read the phase narrative for the project story. Use the [acceptance checklist](q
 
 ## My Test Boundary
 
-I used Kali 192.168.40.158 on VLAN 40 and Metasploitable2 at192.168.250.172 on VLAN 250. The existing five-interface PCAP configuration, including pre-existing WAN monitoring, remained intact. I did not enable IPS, drop rules or bypass. Tests used inert ICMP markers and, when a new flow was needed, one TCP connection to the target's known SSH port without authentication. Backups and secrets stay outside Git.
+I used Kali 192.168.40.158 on VLAN 40 and Metasploitable2 at 192.168.250.172 on VLAN 250. The existing five-interface PCAP configuration, including pre-existing WAN monitoring, remained intact. I did not enable IPS, drop rules or bypass. Tests used inert ICMP markers and, when a new flow was needed, one TCP connection to the target's known SSH port without authentication. Backups and secrets stay outside Git.
 
 ## Phase Status
 
 | Phase | Status | Evidence |
 |---|---|---|
-| 1 â€” Audit and safety | Verified; restore untested | [Backup and baseline](evidence/q027-backup-and-rules-20260920.md) |
-| 2 â€” Detect-only baseline | Verified | [IDS baseline](evidence/q027-ids-baseline-20260920.md) |
-| 3 â€” Alert pipeline | Positive correlation and local/indexed controls verified | [Controlled tests](evidence/q027-controlled-test-20260920.md) |
-| 4 â€” Synthetic tuning | Local comparison verified | [Tuning evidence](evidence/q027-tuning-disabled.json) |
-| 5 â€” Scoped break/fix | In progress | [Current acceptance](q027-acceptance-checklist.md) |
-| 6 â€” IPS decision | Deferred with reasons | Decision below |
+| 1 — Audit and safety | Verified; restore untested | [Backup and baseline](evidence/q027-backup-and-rules-20260920.md) |
+| 2 — Detect-only baseline | Verified | [IDS baseline](evidence/q027-ids-baseline-20260920.md) |
+| 3 — Alert pipeline | Positive correlation and local/indexed controls verified | [Controlled tests](evidence/q027-controlled-test-20260920.md) |
+| 4 — Synthetic tuning | Local comparison verified | [Tuning evidence](evidence/q027-tuning-disabled.json) |
+| 5 — Scoped break/fix | Verified; cleanup complete | [Current acceptance](q027-acceptance-checklist.md) |
+| 6 — IPS decision | Deferred with reasons | Decision below |
 
-## Phase 1 â€” Audit and Safety
+## Phase 1 — Audit and Safety
 
 I confirmed the real interfaces and test endpoints before changing anything. I downloaded an encrypted OPNsense backup, recorded its checksum, and confirmed console readiness. The [refreshed backup metadata](evidence/q027-refreshed-backup-check.json) proves the file exists; I did not test a restore.
 
-## Phase 2 â€” Detect-Only Baseline
+## Phase 2 — Detect-Only Baseline
 
 I retained the running Suricata PCAP configuration. The existing service already inspected the relevant lab path, so I did not recreate it or remove pre-existing WAN monitoring. Runtime checks complemented the GUI settings.
 
 <img src="evidence/screenshots/q027/phase1-ids-baseline.png" alt="Existing detect-only IDS settings" width="900">
 
-## Phase 3 â€” Alert Pipeline
+## Phase 3 — Alert Pipeline
 
 I used the installed SID 2062640 signature and an inert matching ICMP payload. A nonmatching payload supplied a negative control, with positive controls before and after it. Local byte-boundary counts were 8/0/8; these counts include request/reply observations on two interfaces, not eight separate attacks.
 
-Wazuh initially classified the events as generic OPNsense logs. I approved a scoped JSON decoder and child rule 100086, then ran the validated installer. One later indexed event matched local EVE by signature, endpoints, flow and embedded timestamp. The [correlation artifact](evidence/q027-correlated-event.json) records that proof. After renewing login, I verified16 indexed events around the quiet window, zero inside it, eight after it, and eight from final cleanup using embedded sensor timestamps. The [final indexed validation](evidence/q027-final-indexed-validation.json) records the exact query windows.
+Wazuh initially classified the events as generic OPNsense logs. I approved a scoped JSON decoder and child rule 100086, then ran the validated installer. One later indexed event matched local EVE by signature, endpoints, flow and embedded timestamp. The [correlation artifact](evidence/q027-correlated-event.json) records that proof. After renewing login, I verified 16 indexed events around the quiet window, zero inside it, eight after it, and eight from final cleanup using embedded sensor timestamps. The [final indexed validation](evidence/q027-final-indexed-validation.json) records the exact query windows.
 
 <img src="evidence/screenshots/q027/q027-wazuh-final-controls.png" alt="Eight indexed final cleanup control alerts" width="900">
 
@@ -54,19 +54,19 @@ Wazuh initially classified the events as generic OPNsense logs. I approved a sco
 
 The [earlier indexed-positive screenshot](evidence/screenshots/q027/wazuh-indexed-alerts.png) is retained as historical evidence.
 
-## Phase 4 â€” Synthetic Tuning
+## Phase 4 — Synthetic Tuning
 
 I approved a disposable rule restricted to the exact lab pair, with Alert action and bypass disabled. It deliberately generated low-value alerts for harmless traffic. Disabling only this rule removed its alert while the existing independent control continued to produce eight alerts. This demonstrates scoped noise reduction; it does not prove that a real threat signature was a false positive.
 
 <img src="evidence/screenshots/q027/q027-tuning-disabled.png" alt="Only the disposable tuning rule is disabled" width="900">
 
-## Phase 5 â€” Scoped Break/Fix
+## Phase 5 — Scoped Break/Fix
 
 I replaced the older broad interface/service failure exercises with an approved temporary-rule disable-and-restore exercise. Testing exposed two important details: Apply triggered consecutive rule reloads, and IP-only rules are inspected once per flow direction. I therefore waited for completed reloads and used a fresh, harmless TCP connection for the temporary rule, retaining ICMP SID 2062640 as an independent control. The separate fresh-flow baseline, disabled and restored states produced temporary-rule counts of 1/0/1, while each independent control produced eight alerts. Cleanup removed the temporary rule and another fresh control still produced eight alerts. The detailed record preserves unsuccessful attempts rather than presenting them as passes.
 
 <img src="evidence/screenshots/q027/q027-breakfix-enabled.png" alt="Enabled temporary rule for the independent break/fix baseline" width="900">
 
-## Phase 6 â€” IPS Decision
+## Phase 6 — IPS Decision
 
 I deferred blocking mode. Synthetic tuning does not establish production false-positive tolerance, the existing capture scope includes WAN, and OPNsense clock synchronization remains unhealthy with roughly 127 seconds of skew. These are reasons to keep detect-only monitoring while resolving the operational gaps. No IPS or drop change was made. This decision is documentation-only, so it does not require a separate live screenshot.
 

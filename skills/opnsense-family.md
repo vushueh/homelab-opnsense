@@ -80,7 +80,7 @@ Every phase should include:
 |---|---------|--------|
 | 01 | Baseline Router Deployment | Complete |
 | 02 | VLAN Segmentation | Complete |
-| 03 | IDS/IPS with Suricata | Planned |
+| 03 | IDS/IPS with Suricata | Complete (detect-only; IPS deferred) |
 | 04 | VPN Remote Access | Planned |
 | 05 | Monitoring and SIEM Integration | Planned |
 | 06 | High Availability Design | Future |
@@ -98,9 +98,9 @@ Every phase should include:
 
 ## Recommended Next Project
 
-Project 03: IDS/IPS with Suricata.
+Project 05 / Q028: Monitoring and SIEM Integration (planned; not started).
 
-Reason: it turns OPNsense from a router/firewall into a security sensor, and it gives useful output for the later SOC and monitoring projects.
+Reason: Q027 completed detect-only inspection and verified Suricata delivery to Wazuh. Follow the canonical queue before activating the broader monitoring project.
 
 ## Response Standard
 
