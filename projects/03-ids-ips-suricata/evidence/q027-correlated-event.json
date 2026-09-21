@@ -1,0 +1,30 @@
+[
+  {
+    "file": "eve.json",
+    "timestamp": "2026-09-20T18:52:46.304533-0700",
+    "flow_id": 2111090052162844,
+    "in_iface": "vlan03",
+    "src_ip": "192.168.40.158",
+    "dest_ip": "192.168.250.172",
+    "proto": "ICMP",
+    "icmp_type": 8,
+    "icmp_code": 0,
+    "signature_id": 2062640,
+    "signature": "ET INFO Observed ipconfig Command via Inbound ICMP",
+    "action": "allowed"
+  },
+  {
+    "file": "suricata_20260920.log",
+    "timestamp": "2026-09-20T18:52:46.304533-0700",
+    "flow_id": 2111090052162844,
+    "in_iface": "vlan03",
+    "src_ip": "192.168.40.158",
+    "dest_ip": "192.168.250.172",
+    "proto": "ICMP",
+    "icmp_type": 8,
+    "icmp_code": 0,
+    "signature_id": 2062640,
+    "signature": "ET INFO Observed ipconfig Command via Inbound ICMP",
+    "action": "allowed"
+  }
+]

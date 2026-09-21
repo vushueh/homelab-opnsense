@@ -1,0 +1,183 @@
+{
+  "interfaces": [
+    {
+      "id": "wan",
+      "device": "hn2",
+      "description": "",
+      "private_ipv4": "192.168.10.32",
+      "prefix": "24"
+    },
+    {
+      "id": "lan",
+      "device": "hn1",
+      "description": "LAN",
+      "private_ipv4": "OMITTED",
+      "prefix": ""
+    },
+    {
+      "id": "lo0",
+      "device": "lo0",
+      "description": "Loopback",
+      "private_ipv4": "OMITTED",
+      "prefix": "8"
+    },
+    {
+      "id": "opt1",
+      "device": "hn0",
+      "description": "OPT1_Management",
+      "private_ipv4": "192.168.20.253",
+      "prefix": "24"
+    },
+    {
+      "id": "opt2",
+      "device": "vlan01",
+      "description": "AttackLabVLAN250",
+      "private_ipv4": "192.168.250.1",
+      "prefix": "24"
+    },
+    {
+      "id": "opt3",
+      "device": "vlan02",
+      "description": "LAN_VLAN30",
+      "private_ipv4": "192.168.30.1",
+      "prefix": "24"
+    },
+    {
+      "id": "opt4",
+      "device": "vlan03",
+      "description": "VLAN40",
+      "private_ipv4": "192.168.40.1",
+      "prefix": "24"
+    },
+    {
+      "id": "opt5",
+      "device": "vlan04",
+      "description": "VLAN70",
+      "private_ipv4": "192.168.70.1",
+      "prefix": "24"
+    },
+    {
+      "id": "opt6",
+      "device": "vlan07",
+      "description": "VLAN500",
+      "private_ipv4": "OMITTED",
+      "prefix": ""
+    },
+    {
+      "id": "opt8",
+      "device": "vlan08",
+      "description": "RSPAN_MONITOR999",
+      "private_ipv4": "OMITTED",
+      "prefix": ""
+    },
+    {
+      "id": "opt7",
+      "device": "vlan010",
+      "description": "VLAN200DMZ",
+      "private_ipv4": "192.168.200.1",
+      "prefix": "24"
+    },
+    {
+      "id": "opt9",
+      "device": "vlan09",
+      "description": "VLAN100DMZ",
+      "private_ipv4": "192.168.100.1",
+      "prefix": "24"
+    }
+  ],
+  "ids_sections": {
+    "rules": [
+      "rule"
+    ],
+    "policies": [],
+    "userDefinedRules": [],
+    "files": [
+      "file"
+    ],
+    "fileTags": [],
+    "general": [
+      "enabled",
+      "mode",
+      "divert_listeners",
+      "promisc",
+      "interfaces",
+      "homenet",
+      "defaultPacketSize",
+      "UpdateCron",
+      "AlertLogrotate",
+      "AlertSaveLogs",
+      "MPMAlgo",
+      "detect",
+      "syslog",
+      "syslog_eve",
+      "LogPayload",
+      "verbosity",
+      "eveLog"
+    ]
+  },
+  "sftp": [
+    {
+      "enabled": "1",
+      "url": "VALUE_OMITTED",
+      "privkey": "VALUE_OMITTED",
+      "password": "VALUE_OMITTED",
+      "backupcount": "60",
+      "prefixhostname": "VALUE_OMITTED"
+    }
+  ],
+  "log_files": [
+    {
+      "name": "eve.json",
+      "bytes": 10438,
+      "mtime_utc": "2026-09-20T17:48:20-06:00"
+    },
+    {
+      "name": "stats.log",
+      "bytes": 2042334,
+      "mtime_utc": "2026-09-20T17:46:48-06:00"
+    },
+    {
+      "name": "stats.log.0",
+      "bytes": 2881384,
+      "mtime_utc": "2026-09-20T01:00:00-06:00"
+    },
+    {
+      "name": "stats.log.1",
+      "bytes": 2813541,
+      "mtime_utc": "2026-09-19T01:00:00-06:00"
+    }
+  ],
+  "local_backups": [
+    {
+      "name": "config-1788484086.303.xml",
+      "bytes": 96241,
+      "mtime_utc": "2026-09-03T19:08:06-06:00"
+    },
+    {
+      "name": "config-1788483704.1452.xml",
+      "bytes": 96081,
+      "mtime_utc": "2026-09-03T19:01:44-06:00"
+    },
+    {
+      "name": "config-1787088376.5841.xml",
+      "bytes": 95944,
+      "mtime_utc": "2026-08-18T15:26:16-06:00"
+    }
+  ],
+  "ids_general": {
+    "enabled": "1",
+    "mode": "pcap",
+    "promisc": "1",
+    "interfaces": "opt2,opt7,opt3,opt4,wan",
+    "syslog": "1",
+    "syslog_eve": "1"
+  },
+  "eve_current_file": {
+    "sample_limit_bytes": 1048576,
+    "types": {
+      "ssh": 27
+    },
+    "alert_sids": []
+  },
+  "local_backup_count": 100
+}

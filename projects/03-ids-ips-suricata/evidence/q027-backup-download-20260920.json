@@ -1,0 +1,10 @@
+{
+  "filename": "config-OPNsense.internal-20260920165023.xml",
+  "path": "C:\\Users\\CHONGONG\\Downloads\\config-OPNsense.internal-20260920165023.xml",
+  "bytes": 130183,
+  "sha256": "799586fd4e59d49294ff790385d2345b9c87eec25f7f245b53247074d0906bce",
+  "modified_utc": "2026-09-20T17:48:16.918653-06:00",
+  "restore_attempted": false,
+  "xml_valid": false,
+  "protection": "OPNsense encrypted backup marker verified; decryption and recovery not tested."
+}

@@ -1,0 +1,20 @@
+{
+  "status": "PLANNING_ACCEPTED_AFTER_CODEX_CORRECTIONS",
+  "project_status": "IN_PROGRESS_AUDIT",
+  "original_handoff": "HANDOFF_INVALID: ready receipt included external live gaps",
+  "criteria": {
+    "AC-01": "PASS after documented corrections (planning only)",
+    "AC-02": "PASS after documented corrections (planning only)",
+    "AC-03": "PASS after documented corrections (planning only)",
+    "AC-04": "PASS after documented corrections (planning only)",
+    "AC-05": "PASS after documented corrections (planning only)",
+    "AC-06": "PASS after documented corrections (planning only)"
+  },
+  "live_checks": "ALL_PENDING",
+  "files": {
+    "q027-acceptance-checklist.md": "085c28061a5be90c4052a377786e521641874730cb9c7db7b23e30a9a7729c93",
+    "q027-evidence-plan.md": "0c1272364c85f70079e40cf6f982ed3a26a34768f2df67a476e395dc9f44b113",
+    "q027-execution-runbook.md": "85ff664bab6eaae03528ca66ca7bd9c1ade086d1590dc274bde5c554eed10dd1",
+    "q027-procedure-corrections.md": "30499fef7aa9c5ddb385f712afa8817be685612e8d342e399e804acf89b9e311"
+  }
+}

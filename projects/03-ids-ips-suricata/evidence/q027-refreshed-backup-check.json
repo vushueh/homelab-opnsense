@@ -1,0 +1,16 @@
+[
+  {
+    "name": "config-OPNsense.internal-20260920193624.xml",
+    "bytes": 130248,
+    "modified_utc": "2026-09-21T02:34:18.516125+00:00",
+    "encrypted_wrapper": true,
+    "sha256": "7091f433f26c5c27d5c2f7af585265f213520f11a8dd12f9e01382b903925968"
+  },
+  {
+    "name": "config-OPNsense.internal-20260920165023.xml",
+    "bytes": 130183,
+    "modified_utc": "2026-09-20T23:48:16.918653+00:00",
+    "encrypted_wrapper": true,
+    "sha256": "799586fd4e59d49294ff790385d2345b9c87eec25f7f245b53247074d0906bce"
+  }
+]

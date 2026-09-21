@@ -1,0 +1,544 @@
+{
+  "rule_overrides": [
+    {
+      "sid": "2000005",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000007",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000031",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000048",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000049",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000342",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000372",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000377",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000378",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000373",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000379",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000380",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000488",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000536",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000537",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000538",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000540",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000543",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000544",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000545",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000546",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2000559",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001022",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001024",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001046",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001023",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001048",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001058",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001066",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001099",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001101",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001102",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001103",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2001105",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2101200",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2101292",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2101882",
+      "enabled": "1",
+      "action": "alert"
+    },
+    {
+      "sid": "2101885",
+      "enabled": "1",
+      "action": "alert"
+    }
+  ],
+  "rule_files": [
+    {
+      "filename": "emerging-attack_response.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "abuse.ch.urlhaus.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-exploit.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-scan.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-phishing.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "abuse.ch.feodotracker.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-exploit_kit.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-malware.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-mobile_malware.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "abuse.ch.threatfox.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-web_client.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-web_server.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "tor.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-dns.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-info.rules",
+      "enabled": "1"
+    },
+    {
+      "filename": "emerging-worm.rules",
+      "enabled": "1"
+    }
+  ],
+  "policy_count": 0,
+  "user_defined_count": 0,
+  "installed_rule_files": [
+    {
+      "file": "OPNsense.rules",
+      "bytes": 98,
+      "action_counts": {
+        "alert": 0,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "abuse.ch.feodotracker.rules",
+      "bytes": 1049,
+      "action_counts": {
+        "alert": 2,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "abuse.ch.threatfox.rules",
+      "bytes": 36606308,
+      "action_counts": {
+        "alert": 97296,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "abuse.ch.urlhaus.rules",
+      "bytes": 13280395,
+      "action_counts": {
+        "alert": 30579,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-attack_response.rules",
+      "bytes": 642539,
+      "action_counts": {
+        "alert": 668,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-dns.rules",
+      "bytes": 21231,
+      "action_counts": {
+        "alert": 26,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-exploit.rules",
+      "bytes": 1423187,
+      "action_counts": {
+        "alert": 1654,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-exploit_kit.rules",
+      "bytes": 2961357,
+      "action_counts": {
+        "alert": 1577,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-info.rules",
+      "bytes": 5176254,
+      "action_counts": {
+        "alert": 8120,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-malware.rules",
+      "bytes": 15952495,
+      "action_counts": {
+        "alert": 16775,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-mobile_malware.rules",
+      "bytes": 826888,
+      "action_counts": {
+        "alert": 1140,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-phishing.rules",
+      "bytes": 2117471,
+      "action_counts": {
+        "alert": 2758,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-scan.rules",
+      "bytes": 168289,
+      "action_counts": {
+        "alert": 285,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-web_client.rules",
+      "bytes": 506372,
+      "action_counts": {
+        "alert": 475,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-web_server.rules",
+      "bytes": 506913,
+      "action_counts": {
+        "alert": 705,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "emerging-worm.rules",
+      "bytes": 10910,
+      "action_counts": {
+        "alert": 9,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    },
+    {
+      "file": "tor.rules",
+      "bytes": 465295,
+      "action_counts": {
+        "alert": 781,
+        "drop": 0,
+        "reject": 0,
+        "pass": 0
+      }
+    }
+  ],
+  "icmp_candidates": [
+    {
+      "file": "emerging-exploit.rules",
+      "sid": 2026567,
+      "conditions": {
+        "itype": "12",
+        "icode": "0"
+      },
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-exploit.rules",
+      "sid": 2030242,
+      "conditions": {
+        "icode": "0",
+        "dsize": ">120"
+      },
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2016145,
+      "conditions": {
+        "itype": "8",
+        "icode": "0"
+      },
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2016146,
+      "conditions": {
+        "itype": "0",
+        "icode": "0"
+      },
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2062639,
+      "conditions": [],
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2062640,
+      "conditions": [],
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2062641,
+      "conditions": [],
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2062642,
+      "conditions": [],
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-info.rules",
+      "sid": 2062643,
+      "conditions": [],
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-malware.rules",
+      "sid": 2008726,
+      "conditions": {
+        "itype": "8",
+        "icode": "0",
+        "dsize": "20"
+      },
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-malware.rules",
+      "sid": 2009130,
+      "conditions": {
+        "itype": "8",
+        "icode": "0",
+        "dsize": "9"
+      },
+      "has_content": true,
+      "has_threshold": false
+    },
+    {
+      "file": "emerging-malware.rules",
+      "sid": 2009131,
+      "conditions": {
+        "itype": "0",
+        "icode": "0",
+        "dsize": "9"
+      },
+      "has_content": true,
+      "has_threshold": false
+    }
+  ]
+}

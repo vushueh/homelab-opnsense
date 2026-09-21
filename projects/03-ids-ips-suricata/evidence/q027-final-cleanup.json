@@ -1,0 +1,128 @@
+{
+  "phase": "final-cleanup",
+  "state": {
+    "rules": [],
+    "rendered": [],
+    "enabled": "1",
+    "interfaces": "opt2,opt7,opt3,opt4,wan",
+    "promisc": "1",
+    "pid": "58176"
+  },
+  "reload": "<173>1 2026-09-20T20:12:26-07:00 OPNsense.internal suricata 58176 - [meta sequenceId=\"32\"] [100834] <Notice> -- rule reload complete\n",
+  "windows": [
+    {
+      "name": "benign_marker",
+      "start": {
+        "time": "2026-09-21T03:12:50+00:00",
+        "inode": 2003598,
+        "offset": 143595,
+        "alerts": []
+      },
+      "end": {
+        "time": "2026-09-21T03:13:00+00:00",
+        "inode": 2003598,
+        "offset": 144364,
+        "alerts": []
+      },
+      "delivery": "{\"connected\": true, \"source\": [\"192.168.40.158\", 54450], \"destination\": [\"192.168.250.172\", 22]}\n",
+      "counts": {
+        "4294967294": 0,
+        "2062640": 0
+      },
+      "pass": true
+    },
+    {
+      "name": "independent_control",
+      "start": {
+        "time": "2026-09-21T03:13:00+00:00",
+        "inode": 2003598,
+        "offset": 144364
+      },
+      "end": {
+        "time": "2026-09-21T03:13:11+00:00",
+        "inode": 2003598,
+        "offset": 151304,
+        "alerts": [
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:02.671219-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:02.671894-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:02.671263-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:02.671880-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:03.672557-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:03.673338-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan03",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:03.672584-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan01",
+            "action": "allowed"
+          },
+          {
+            "sid": 2062640,
+            "timestamp": "2026-09-20T20:13:03.673323-0700",
+            "flow_id": 1829310132774172,
+            "src": "192.168.250.172",
+            "dst": "192.168.40.158",
+            "iface": "vlan01",
+            "action": "allowed"
+          }
+        ]
+      },
+      "delivery": "PATTERN: 0x6970636f6e66696720\nPING 192.168.250.172 (192.168.250.172) 48(76) bytes of data.\n56 bytes from 192.168.250.172: icmp_seq=1 ttl=63 time=1.54 ms\n56 bytes from 192.168.250.172: icmp_seq=2 ttl=63 time=2.10 ms\n\n--- 192.168.250.172 ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1002ms\nrtt min/avg/max/mdev = 1.535/1.819/2.104/0.284 ms\n",
+      "counts": {
+        "4294967294": 0,
+        "2062640": 8
+      },
+      "pass": true
+    }
+  ]
+}

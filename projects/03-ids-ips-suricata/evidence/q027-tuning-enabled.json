@@ -1,0 +1,57 @@
+{
+  "method": "Fresh EVE byte boundaries; temporary rule enabled tuning baseline",
+  "temporary_sid": 4294967294,
+  "windows": [
+    {
+      "name": "benign_marker",
+      "start": {
+        "time": "2026-09-21T02:45:08+00:00",
+        "inode": 2003598,
+        "offset": 68212,
+        "alerts": []
+      },
+      "end": {
+        "time": "2026-09-21T02:45:16+00:00",
+        "inode": 2003598,
+        "offset": 69958,
+        "alerts": [
+          {
+            "sid": 4294967294,
+            "timestamp": "2026-09-20T19:45:11.532006-0700",
+            "flow_id": 2003475351594268,
+            "src": "192.168.40.158",
+            "dst": "192.168.250.172",
+            "iface": "vlan03",
+            "action": "allowed"
+          }
+        ]
+      },
+      "delivery": "PATTERN: 0x7870636f6e66696720\nPING 192.168.250.172 (192.168.250.172) 48(76) bytes of data.\n56 bytes from 192.168.250.172: icmp_seq=1 ttl=63 time=5.13 ms\n56 bytes from 192.168.250.172: icmp_seq=2 ttl=63 time=0.915 ms\n\n--- 192.168.250.172 ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1001ms\nrtt min/avg/max/mdev = 0.915/3.022/5.129/2.107 ms\n",
+      "counts": {
+        "4294967294": 1,
+        "2062640": 0
+      },
+      "pass": true
+    },
+    {
+      "name": "independent_control",
+      "start": {
+        "time": "2026-09-21T02:45:16+00:00",
+        "inode": 2003598,
+        "offset": 69958
+      },
+      "end": {
+        "time": "2026-09-21T02:45:23+00:00",
+        "inode": 2003598,
+        "offset": 70345,
+        "alerts": []
+      },
+      "delivery": "PATTERN: 0x6970636f6e66696720\nPING 192.168.250.172 (192.168.250.172) 48(76) bytes of data.\n56 bytes from 192.168.250.172: icmp_seq=1 ttl=63 time=1.92 ms\n56 bytes from 192.168.250.172: icmp_seq=2 ttl=63 time=1.46 ms\n\n--- 192.168.250.172 ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1001ms\nrtt min/avg/max/mdev = 1.457/1.686/1.915/0.229 ms\n",
+      "counts": {
+        "4294967294": 0,
+        "2062640": 0
+      },
+      "pass": false
+    }
+  ]
+}

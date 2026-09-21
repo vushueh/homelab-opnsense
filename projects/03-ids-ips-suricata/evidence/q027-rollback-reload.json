@@ -1,0 +1,14 @@
+{
+  "process": "/usr/local/bin/suricata -D --pcap=vlan01 --pcap=vlan010 --pcap=vlan02 --pcap=vlan03 --pcap=hn2 --pidfile /var/run/suricata.pid -c /usr/local/etc/suricata/suricata.yaml",
+  "control_rules": [
+    {
+      "file": "/usr/local/etc/suricata/opnsense.rules/emerging-info.rules",
+      "rule": "alert icmp any any -> [$HOME_NET,$HTTP_SERVERS] any (msg:\"ET INFO Observed ipconfig Command via Inbound ICMP\"; content:\"ipconfig|20|\"; nocase; classtype:misc-activity; sid:2062640; rev:1; metadata:created_at 2025_05_30, signature_severity Unknown, updated_at 2025_05_30;)"
+    }
+  ],
+  "reload_events": [
+    "<173>1 2026-09-20T19:48:58-07:00 OPNsense.internal suricata 58176 - [meta sequenceId=\"16\"] [100834] <Notice> -- rule reload complete",
+    "<173>1 2026-09-20T19:48:58-07:00 OPNsense.internal suricata 58176 - [meta sequenceId=\"17\"] [100834] <Notice> -- rule reload starting",
+    "<173>1 2026-09-20T19:49:33-07:00 OPNsense.internal suricata 58176 - [meta sequenceId=\"32\"] [100834] <Notice> -- rule reload complete"
+  ]
+}

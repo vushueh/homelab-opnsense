@@ -195,3 +195,10 @@ Two gaps found and fixed in the local family skill. Codex should add these to th
 3. **Phase 2 — rule set scope too vague.** "Enable a small starter set, such as ET Open informational/test rules" is not specific enough. Should specify: enable `ET Open` → category `test` only for the first run. Enabling all ET Open categories at once will generate hundreds of alerts per minute and make triage impossible.
 
 **Recommendation for Codex before P03 starts:** patch phase-1-audit-and-safety.md and phase-2-enable-ids-mode.md with the three items above, then update CODEX-LOG.md.
+
+## Q027-01 — 2026-09-20: planning delivered, live audit pending
+
+Status: RESOLVED. Leonel selected Q027 and explicitly approved the curated source pack for Claude. One file-only Sonnet assignment completed; Codex reviewed four documents and corrected full-restore defaults, explicit PCAP mode, mandatory Wazuh proof, independent controls, tuning and scope-choice wording. See projects/03-ids-ips-suricata/q027-execution-runbook.md and evidence/q027-planning-review-20260920.md. Dashboard read only; no live commands/configuration change, no screenshot or alert test claimed. Next: user opens IDS settings without Save/Apply. All pre-change facts and exact implementation approval remain pending. Prior unrelated edits retained; no commit/push authorized for this phase.
+
+
+**Q027-01 Resolution — 2026-09-20:** Approved live scope completed with backup, local/indexed controls, scoped tuning, independent rule fault/restoration and verified cleanup. Seven screenshots and dated project-closeout.md retained. Earlier planning-only statements are historical. IPS deferred; clock and pipeline follow-ups recorded. Publication pending, Q028 unstarted.
