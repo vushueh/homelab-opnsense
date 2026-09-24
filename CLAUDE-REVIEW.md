@@ -6,6 +6,30 @@
 
 ## Active Items
 
+### 2026-09-23 Q028-01 — P05 monitoring in progress (lock)
+Status: RESOLVED 2026-09-24
+Priority: high
+For: Claude (primary), Codex (peer review), Leonel (gates)
+
+Q028 / OPN-P05-MONITORING started 2026-09-23 under Leonel's direction. Plan:
+[q028-execution-runbook.md](projects/05-monitoring-integration/q028-execution-runbook.md),
+built from Codex's read-only bridge plan and verified by Claude. Read-only
+discovery is approved for OPNsense, Wazuh and FreePBX. Wazuh unprivileged state
+has been read. OPNsense access path, FreePBX reachability and Wazuh sudo
+reads are awaiting Leonel. No live change has been made. Close this item at Q028 closeout.
+
+**Update 2026-09-24 — PAUSED by Leonel.** Gates G1, G2, G3, G5 and GF are
+executed. G1 = new auth-facility target, G5 = lab NetFlow interfaces; GF
+pipeline fault passed at the manager stage. The V3 controlled test is
+deferred. Blocker: the SIEM host's disk is full and its indices are read-only,
+so nothing indexes. A Codex-reviewed urgent recovery plan (U1) awaits Leonel's
+approval. Temporary live items remain (test extension, heartbeat, watcher,
+temporary sudo rule). **Resume from the private handoff:**
+`homelab-management/projects/q028-monitoring-integration/HANDOFF-20260924.md`.
+
+**Q028 resolution — 2026-09-24 (Codex):** Leonel authorized autonomous completion. U1 recovered indexing with 57 GB free; all 923 expected markers and seven measured manager/index populations match exactly. Benign pass/IDS/flow tests and temporary cleanup passed; unrestricted sudo removed. Controlled V3, GUI query import after session expiry, and handset audio verification have explicit revival triggers in [project-closeout.md](projects/05-monitoring-integration/project-closeout.md). Earlier pause/blocker statements are historical. Q029 remains unstarted. Q018 and unrelated dirty work are excluded from scoped publication.
+
+
 ### 2026-07-18 ITEM-U0-01 — Verify the current VLAN 20 management address
 Status: OPEN
 Priority: medium

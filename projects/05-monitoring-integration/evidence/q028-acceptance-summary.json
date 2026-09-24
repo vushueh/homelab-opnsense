@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-24",
+  "verified_utc": "2026-09-24T08:31:26Z",
+  "root_used_percent": 67,
+  "root_free_gib_displayed": 57,
+  "snapshot_used_percent": 52,
+  "disk_expanded": false,
+  "index_blocks": 0,
+  "manager_indexed_identity_matches": {
+    "firewall_markers": {
+      "manager": 923,
+      "indexed": 923,
+      "exact_multiset_equal": true
+    },
+    "f2_tcp": {
+      "manager": 6,
+      "indexed": 6,
+      "exact_multiset_equal": true
+    },
+    "f3_positive": {
+      "manager": 8,
+      "indexed": 8,
+      "exact_multiset_equal": true
+    },
+    "auth": {
+      "manager": 10,
+      "indexed": 10,
+      "exact_multiset_equal": true
+    },
+    "pipeline": {
+      "manager": 4,
+      "indexed": 4,
+      "exact_multiset_equal": true
+    },
+    "voip": {
+      "manager": 645,
+      "indexed": 645,
+      "exact_multiset_equal": true
+    },
+    "canary": {
+      "manager": 3,
+      "indexed": 3,
+      "exact_multiset_equal": true
+    }
+  },
+  "firewall_marker_distinct_ports": 923,
+  "firewall_marker_duplicates": 0,
+  "ids_negative_count": 0,
+  "source_fault_local_packets": 1260,
+  "source_fault_received": 863,
+  "source_fault_unforwarded": 397,
+  "stale_detection_seconds": 67,
+  "replay_valid_nonnoise_alerts": 66199,
+  "malformed_historical_fragments_preserved": 20,
+  "temporary_cleanup": "PASS; extension, heartbeat, watcher, staging, replay input and sudo removed",
+  "permanent_changes": [
+    "auth-only target",
+    "lab VLAN NetFlow capture",
+    "source-scoped Q028 decoder/rules",
+    "workstation-specific 5152/5157 collection and backlog exclusion"
+  ],
+  "deferred": [
+    "controlled V3 registration and emitter-down sequence until stable dedicated softphone",
+    "dashboard saved-query import and screenshot until authenticated GUI session available",
+    "handset audio test at next attended family call"
+  ],
+  "limits": [
+    "historical daily logs contain partial coverage; no full-history recovery claimed",
+    "sensor clock skew remains; no cross-host latency claim",
+    "single-node cluster yellow from unassigned replicas; active primaries healthy"
+  ]
+}

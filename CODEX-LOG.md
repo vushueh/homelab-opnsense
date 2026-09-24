@@ -258,3 +258,14 @@ Completed independent temporary-rule fault/restoration and cleanup:1/0/1 tempora
 
 ## Q027 final indexed acceptance and closeout — September20
 Renewed Wazuh login verified surrounding16/quiet0/later8/final8 indexed controls and exact final local-event match. Closed Q027 locally, IPS deferred, seven screenshots, review item resolved; clock/transport limitations retained. No publication; Q028 unstarted.
+
+## Session — 2026-09-23/24, Q028 (Claude primary; Codex peer via direct CLI bridge)
+
+- Codex (read-only) produced the Q028 plan, then reviewed the change gates: rev 1 FAIL, rev 2 FAIL (all findings addressed in rev 3 by Claude). Later Codex reviewed the SIEM disk-recovery options: PROCEED-WITH-CHANGES.
+- Executed with Leonel's approval: an auth-facility remote target, lab NetFlow interfaces, Q028 Wazuh rules 100280–100285 with a stale watcher, a production-PBX test extension with a heartbeat, and a pipeline fault test (PASS at the manager stage).
+- Paused by Leonel. Blocker: the SIEM disk is full and its indices are read-only. Resume from the private `homelab-management/projects/q028-monitoring-integration/HANDOFF-20260924.md`.
+- No commit or push. Q018 local-only files untouched.
+
+## Session — 2026-09-24, Q028 autonomous completion
+
+Leonel authorized autonomous completion. U1 recovered indexing with 57 GB free; all 923 expected markers and seven measured manager/index populations match exactly. Benign pass/IDS/flow tests and temporary cleanup passed; unrestricted sudo removed. Controlled V3, GUI query import after session expiry, and handset audio verification have explicit revival triggers in [project-closeout.md](projects/05-monitoring-integration/project-closeout.md). Earlier pause/blocker statements are historical. Q029 remains unstarted. Q018 and unrelated dirty work are excluded from scoped publication.

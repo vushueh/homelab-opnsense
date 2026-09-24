@@ -99,4 +99,4 @@ Confirm the owned endpoints, private backup, console access and unchanged PCAP s
 
 ## What Happens Next
 
-Q027 is complete with IPS deferred. The immediate successor is Q028 — OPNsense Monitoring and SIEM Integration, still planned and unstarted. The [canonical queue](https://github.com/vushueh/family-projects-ai-playbook/blob/main/docs/homelab-goals.yaml) controls its activation. Commit, push and merge are authorized for this package; no successor live work is authorized by this closeout.
+Q027 is complete with IPS deferred. The immediate successor is [Q028 — OPNsense Monitoring and SIEM Integration](../05-monitoring-integration/README.md), completed in its accepted scope on 2026-09-24 with explicit deferrals. The [canonical queue](https://github.com/vushueh/family-projects-ai-playbook/blob/main/docs/homelab-goals.yaml) controls its activation. Commit, push and merge are authorized for this package; no successor live work is authorized by this closeout.

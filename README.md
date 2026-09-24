@@ -61,7 +61,7 @@ controls when each project or follow-on proof may run across all families.
 | 02 | [VLAN Segmentation](projects/02-vlan-segmentation/) | Q068 follow-on verification | ✅ Core project complete | Document VLANs, DHCP, routing, firewall rules, and lab segmentation |
 | 03 | [IDS/IPS with Suricata](projects/03-ids-ips-suricata/) | Q027 | Complete 2026-09-20 | Verified detect-only controls, Wazuh correlation, scoped tuning/recovery and cleanup; IPS deferred |
 | 04 | [VPN Remote Access](projects/04-vpn-remote-access/) | Q070 | ⬜ Planned | Build controlled remote access into lab networks |
-| 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Q028 | ⬜ Planned | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
+| 05 | [Monitoring and SIEM Integration](projects/05-monitoring-integration/) | Q028 | Complete (V3 controlled sequence deferred) | Send logs, NetFlow, and firewall telemetry to Wazuh/SOC tooling |
 | 06 | [High Availability Design](projects/06-high-availability/) | Q078 | ⬜ Planned | Design CARP/pfsync HA requirements and failover testing |
 | 07 | [DNS and DHCP Services](projects/07-dns-dhcp-services/) | Not yet queued | Future | Harden DNS/DHCP design and document resolver behavior |
 | 08 | [Policy Automation](projects/08-policy-automation/) | Not yet queued | Future | Explore API/export workflows, backups, and repeatable change control |
